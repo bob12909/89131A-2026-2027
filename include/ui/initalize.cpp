@@ -64,12 +64,5 @@ void screen_init() {
         display,
         bob_flush_cb
     );
-
-    Themes::init(display);
-
-    // Pick the starting theme
-    lv_display_set_theme(
-        display,
-        Themes::get(Themes::ID::DARK)
-    );
+    Themes::set(Themes::ID::DARK);
 }
