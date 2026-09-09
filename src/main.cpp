@@ -14,7 +14,7 @@
 
 void initialize() {
 	while(true) {
-		screen_init();
+		initializeGUI();
 		Screens::init();
 		Screens::show_main();
 		pros::delay(5);

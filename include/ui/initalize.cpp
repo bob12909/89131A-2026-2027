@@ -8,16 +8,18 @@
 #include "pros/colors.hpp"
 #include "pros/rtos.hpp"
 #include "pros/screen.hpp"
+#include "ui/screens.hpp"
+#include "ui/buttons.hpp"
 
-void bob_flush_cb(
+void my_flush_cb(
     lv_display_t *disp,
     const lv_area_t *area,
     uint8_t *color_p
 ) {
-    int width = area->x2 - area->x1 + 1;
-
     for (int y = area->y1; y <= area->y2; y++) {
         for (int x = area->x1; x <= area->x2; x++) {
+
+            int width = area->x2 - area->x1 + 1;
 
             int index =
                 (y - area->y1) * width +
@@ -33,24 +35,21 @@ void bob_flush_cb(
 
     lv_display_flush_ready(disp);
 }
-
-void screen_init() {
+void lvgl_task_fn(void*) {
+    while (true) {
+        lv_timer_handler();
+        pros::delay(5);
+    }
+}
+void initializeGUI() {
 
     lv_init();
 
     lv_tick_set_cb(pros::millis);
 
-    lv_display_t *display =
-        lv_display_create(480, 240);
+    lv_display_t *display = lv_display_create(480, 240);
 
-    lv_display_set_color_format(
-        display,
-        LV_COLOR_FORMAT_RGB565
-    );
-
-    static uint8_t buf1[
-        480 * 240 / 10 * 2
-    ];
+    static uint8_t buf1[480 * 240 / 10 * 2];
 
     lv_display_set_buffers(
         display,
@@ -60,9 +59,7 @@ void screen_init() {
         LV_DISPLAY_RENDER_MODE_PARTIAL
     );
 
-    lv_display_set_flush_cb(
-        display,
-        bob_flush_cb
-    );
-    Themes::set(Themes::ID::DARK);
+    lv_display_set_flush_cb(display, my_flush_cb);
+
+    // Your GUI objects go below this point
 }
