@@ -4,7 +4,7 @@
 #include "liblvgl/misc/lv_types.h"
 #include "liblvgl/themes/default/lv_theme_default.h"
 #include "liblvgl/tick/lv_tick.h"
-
+#include "themes.hpp"
 #include "pros/colors.hpp"
 #include "pros/rtos.hpp"
 #include "pros/screen.hpp"
@@ -65,14 +65,11 @@ void screen_init() {
         bob_flush_cb
     );
 
-    lv_theme_t *theme =
-        lv_theme_default_init(
-            display,
-            lv_color_hex(0x8cc63f),
-            lv_color_hex(0x8cc63f),
-            true,
-            &lv_font_montserrat_20
-        );
+    Themes::init(display);
 
-    lv_display_set_theme(display, theme);
+    // Pick the starting theme
+    lv_display_set_theme(
+        display,
+        Themes::get(Themes::ID::DARK)
+    );
 }
