@@ -13,13 +13,10 @@
 
 
 void initialize() {
-	while(true) {
-		initializeGUI();
-		Screens::init();
-		Screens::show_main();
-		pros::delay(5);
-	}
-	
+    initializeGUI();
+
+    Screens::init();
+    Screens::show_main();
 }
 
 /**
