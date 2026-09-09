@@ -9,11 +9,13 @@
 #include <cstdint>
 #include "main.h"
 #include "ui/initalize.cpp"
+#include "screens/home_screen.cpp"
 
 
 void initialize() {
 	while(true) {
 		screen_init();
+		create_home_screen();
 		pros::delay(5);
 	}
 	
