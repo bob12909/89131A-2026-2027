@@ -9,13 +9,14 @@
 #include <cstdint>
 #include "main.h"
 #include "ui/initalize.cpp"
-#include "screens/screen.cpp"
+#include "ui/screens.hpp"
 
 
 void initialize() {
 	while(true) {
 		screen_init();
 		Screens::init();
+		Screens::show_main();
 		pros::delay(5);
 	}
 	
