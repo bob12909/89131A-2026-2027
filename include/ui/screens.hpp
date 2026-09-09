@@ -3,7 +3,7 @@
 #include "liblvgl/lvgl.h"
 
 namespace Screens {
-
+    void init();
     void show_main();
     void show_auton();
     void show_settings();
