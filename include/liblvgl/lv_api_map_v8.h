@@ -202,7 +202,7 @@ static inline void lv_obj_move_background(lv_obj_t * obj)
 #endif /* LV_USE_LIST */
 
 #if LV_USE_BUTTON
-#define lv_btn_create        lv_button_create
+#define lv_btn_create       lv_button_create
 #endif /* LV_USE_BUTTON */
 
 #if LV_USE_BUTTONMATRIX

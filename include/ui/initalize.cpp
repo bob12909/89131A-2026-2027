@@ -48,6 +48,7 @@ void initializeGUI() {
     lv_tick_set_cb(pros::millis);
 
     lv_display_t *display = lv_display_create(480, 240);
+    
 
     static uint8_t buf1[480 * 240 / 10 * 2];
 

@@ -14,7 +14,7 @@
 
 void initialize() {
     initializeGUI();
-
+	Themes::set(Themes::ID::SHY);
     Screens::init();
     Screens::show_main();
 }
