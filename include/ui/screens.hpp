@@ -8,5 +8,5 @@ namespace Screens {
     void show_auton();
     void show_settings();
     void show_motors();
-
+    void show_debug();
 }

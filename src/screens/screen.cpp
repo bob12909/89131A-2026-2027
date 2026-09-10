@@ -1,13 +1,14 @@
     #include "ui/screens.hpp"
     #include "ui/themes.hpp"
     #include "ui/buttons.hpp"
-
+    int ID = 0;
     namespace {
 
         lv_obj_t* main_screen;
         lv_obj_t* auton_screen;
         lv_obj_t* settings_screen;
         lv_obj_t* motors_screen;
+        lv_obj_t* debug_screen;
 
     }
 
@@ -30,7 +31,33 @@
     void motors_button(lv_event_t* event) {
         Screens::show_motors();
     }
-
+    void theme_button(lv_event_t* event) {
+        ID += 1;
+        if (ID == 0)
+        {
+         Themes::set(Themes::ID::DARK);   
+        }
+        else if (ID == 1)
+        {
+         Themes::set(Themes::ID::SHY);   
+        }
+        else if (ID == 2)
+        {
+         Themes::set(Themes::ID::KENZY);   
+        }
+        else if (ID == 3)
+        {
+         Themes::set(Themes::ID::BRAYDEN);   
+        }
+        else if (ID == 4)
+        {
+         ID = 0;
+         Themes::set(Themes::ID::DARK);   
+        }
+        Screens::init();
+        Screens::show_settings();
+        
+    }
     // -------------------------
     // Initialize screens
     // -------------------------
@@ -40,6 +67,7 @@
         auton_screen = lv_obj_create(NULL);
         settings_screen = lv_obj_create(NULL);
         motors_screen = lv_obj_create(NULL);
+        debug_screen = lv_obj_create(NULL);
 
 
         // =========================
@@ -118,11 +146,20 @@
         UI::create_button(
             settings_screen,
             "MAIN",
-            20,
+            10,
+            10,
             50,
-            200,
-            60,
+            50,
             main_button
+        );
+        UI::create_button(
+            settings_screen,
+            "THEME",
+            100,
+            10,
+            100,
+            50,
+            theme_button
         );
 
 
@@ -148,6 +185,9 @@
         );
     }
 
+    // -------------------------
+    // debug
+    // -------------------------
 
     // -------------------------
     // Screen switching
@@ -167,4 +207,7 @@
 
     void Screens::show_motors() {
         lv_screen_load(motors_screen);
+    }
+    void Screens::show_debug() {
+        lv_screen_load(debug_screen);
     }
