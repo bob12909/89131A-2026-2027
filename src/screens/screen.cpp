@@ -36,7 +36,6 @@
     // -------------------------
 
     void Screens::init() {
-
         main_screen = lv_obj_create(NULL);
         auton_screen = lv_obj_create(NULL);
         settings_screen = lv_obj_create(NULL);
@@ -46,35 +45,52 @@
         // =========================
         // MAIN SCREEN
         // =========================
-
         UI::create_button(
             main_screen,
             "AUTON",
-            20,
-            50,
+            10,
+            10,
             200,
             60,
             auton_button
         );
-
         UI::create_button(
             main_screen,
             "SETTINGS",
-            20,
-            120,
+            260,
+            10,
             200,
             60,
             settings_button
         );
-
         UI::create_button(
             main_screen,
             "MOTORS",
-            20,
-            190,
+            10,
+            170,
             200,
-            40,
+            60,
             motors_button
+        );
+        lv_obj_t* title = UI::label(
+        main_screen,
+        "89131A",
+        0,
+        0,
+        &lv_font_montserrat_48
+    );
+
+        lv_obj_set_style_text_letter_space(
+            title,
+            10,
+            0
+        );
+
+        lv_obj_align(
+            title,
+            LV_ALIGN_CENTER,
+            0,
+            0
         );
 
 
@@ -85,13 +101,14 @@
         UI::create_button(
             auton_screen,
             "MAIN",
-            20,
+            10,
+            10,
             50,
-            200,
-            60,
+            50,
             main_button
         );
         
+
 
 
         // =========================
@@ -116,11 +133,18 @@
         UI::create_button(
             motors_screen,
             "MAIN",
-            20,
+            10,
+            10,
             50,
-            200,
-            60,
+            50,
             main_button
+        );
+        UI::panel(
+            motors_screen,
+            150,
+            100,
+            100,
+            25
         );
     }
 

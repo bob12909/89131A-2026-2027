@@ -1,6 +1,5 @@
 #pragma once
-
-#include "liblvgl/lv_api_map_v8.h"
+#include "liblvgl/lvgl.h"
 #include "ui/themes.hpp"
 
 namespace UI {
@@ -88,11 +87,14 @@ namespace UI {
     inline lv_obj_t* panel(
         lv_obj_t* parent,
         int32_t width,
-        int32_t height
+        int32_t height,
+        int32_t x,
+        int32_t y
     ) {
         lv_obj_t* obj = lv_obj_create(parent);
 
         size(obj, width, height);
+        lv_obj_set_pos( obj, x, y);
 
         background(obj, theme().panel);
 
@@ -107,17 +109,24 @@ namespace UI {
     // ============================================================
 
     inline lv_obj_t* label(
-        lv_obj_t* parent,
-        const char* text
-    ) {
-        lv_obj_t* obj = lv_label_create(parent);
+    lv_obj_t* parent,
+    const char* text,
+    int32_t x,
+    int32_t y,
+    const lv_font_t* font = &lv_font_montserrat_16
+) {
+    lv_obj_t* obj = lv_label_create(parent);
 
-        lv_label_set_text(obj, text);
+    lv_label_set_text(obj, text);
 
-        text_color(obj, theme().text);
+    lv_obj_set_pos(obj, x, y);
 
-        return obj;
-    }
+    lv_obj_set_style_text_color( obj, theme().text, 0 );
+
+    lv_obj_set_style_text_font( obj, font, 0);
+
+    return obj;
+}
 
 
     inline lv_obj_t* secondary_label(
@@ -135,111 +144,77 @@ namespace UI {
 
 
     // ============================================================
-    // Button
-    // ============================================================
+// Button
+// ============================================================
 
-    inline lv_obj_t* button(
-        lv_obj_t* parent,
-        const char* text,
-        int32_t width = 120,
-        int32_t height = 50
-    ) {
-        lv_obj_t* btn = lv_btn_create(parent);
+inline lv_obj_t* create_button(
+    lv_obj_t* parent,
+    const char* text,
+    int32_t x,
+    int32_t y,
+    int32_t width,
+    int32_t height,
+    lv_event_cb_t callback = nullptr,
+    void* user_data = nullptr
+) {
+    lv_obj_t* btn = lv_button_create(parent);
 
-        size(btn, width, height);
+    lv_obj_set_pos(btn, x, y);
+    lv_obj_set_size(btn, width, height);
 
-        lv_obj_set_style_bg_color(
+    lv_obj_set_style_bg_color(
+        btn,
+        theme().primary,
+        0
+    );
+
+    lv_obj_set_style_bg_opa(
+        btn,
+        LV_OPA_COVER,
+        0
+    );
+
+    lv_obj_set_style_radius(
+        btn,
+        10,
+        0
+    );
+
+    // Pressed state
+    lv_obj_set_style_bg_color(
+        btn,
+        theme().accent,
+        LV_STATE_PRESSED
+    );
+
+    // Button text
+    lv_obj_t* label_obj = lv_label_create(btn);
+
+    lv_label_set_text(
+        label_obj,
+        text
+    );
+
+    lv_obj_set_style_text_color(
+        label_obj,
+        theme().text,
+        0
+    );
+
+    lv_obj_center(label_obj);
+
+    // Click callback
+    if (callback != nullptr) {
+        lv_obj_add_event_cb(
             btn,
-            theme().primary,
-            0
+            callback,
+            LV_EVENT_CLICKED,
+            user_data
         );
-
-        lv_obj_set_style_bg_opa(
-            btn,
-            LV_OPA_COVER,
-            0
-        );
-
-        radius(btn, 10);
-
-
-        // Pressed state
-        lv_obj_set_style_bg_color(
-            btn,
-            theme().accent,
-            LV_STATE_PRESSED
-        );
-
-
-        // Button text
-        lv_obj_t* label_obj = lv_label_create(btn);
-
-        lv_label_set_text(
-            label_obj,
-            text
-        );
-
-        text_color(
-            label_obj,
-            theme().text
-        );
-
-        lv_obj_center(label_obj);
-
-        return btn;
     }
 
-
-    // ============================================================
-    // Button with custom label
-    // ============================================================
-
-    inline lv_obj_t* button(
-        lv_obj_t* parent,
-        lv_obj_t** label_out,
-        const char* text,
-        int32_t width = 120,
-        int32_t height = 50
-    ) {
-        lv_obj_t* btn = lv_btn_create(parent);
-
-        size(btn, width, height);
-
-        lv_obj_set_style_bg_color(
-            btn,
-            theme().primary,
-            0
-        );
-
-        lv_obj_set_style_bg_color(
-            btn,
-            theme().accent,
-            LV_STATE_PRESSED
-        );
-
-        radius(btn, 10);
-
-
-        lv_obj_t* label_obj = lv_label_create(btn);
-
-        lv_label_set_text(
-            label_obj,
-            text
-        );
-
-        text_color(
-            label_obj,
-            theme().text
-        );
-
-        lv_obj_center(label_obj);
-
-        if(label_out != nullptr) {
-            *label_out = label_obj;
-        }
-
-        return btn;
-    }
+    return btn;
+}
 
 
     // ============================================================
@@ -250,9 +225,9 @@ namespace UI {
         lv_obj_t* parent,
         const void* source
     ) {
-        lv_obj_t* img = lv_img_create(parent);
+        lv_obj_t* img = lv_image_create(parent);
 
-        lv_img_set_src(
+        lv_image_set_src(
             img,
             source
         );
@@ -271,7 +246,7 @@ namespace UI {
         int32_t width = 80,
         int32_t height = 80
     ) {
-        lv_obj_t* btn = lv_btn_create(parent);
+        lv_obj_t* btn = lv_button_create(parent);
 
         size(btn, width, height);
 
@@ -290,9 +265,9 @@ namespace UI {
         radius(btn, 10);
 
 
-        lv_obj_t* img = lv_img_create(btn);
+        lv_obj_t* img = lv_image_create(btn);
 
-        lv_img_set_src(
+        lv_image_set_src(
             img,
             source
         );

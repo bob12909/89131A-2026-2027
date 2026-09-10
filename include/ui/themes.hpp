@@ -7,7 +7,8 @@ namespace Themes {
     enum class ID {
         DARK,
         SHY,
-        KENZY
+        KENZY,
+        BRAYDEN
     };
 
     struct Colors {
@@ -53,6 +54,15 @@ namespace Themes {
         .text_secondary = lv_color_hex(0xAAAAAA),
         .accent         = lv_color_hex(0x8CC63F)
     };
+    inline const Colors brayden = {
+        .background     = lv_color_hex(0x0a0a0f),
+        .panel          = lv_color_hex(0x2a0b52),
+        .primary        = lv_color_hex(0x6a1b9a),
+        .secondary      = lv_color_hex(0x2a0b52),
+        .text           = lv_color_hex(0xFFFFFF),
+        .text_secondary = lv_color_hex(0xAAAAAA),
+        .accent         = lv_color_hex(0xc084fc)
+    };
 
     inline const Colors* current = &dark;
 
@@ -67,6 +77,8 @@ namespace Themes {
                 return shy;
             case ID::KENZY:
                 return kenzy;
+            case ID::BRAYDEN:
+                return brayden;
         }
 
         return dark;
