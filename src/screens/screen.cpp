@@ -309,6 +309,10 @@
             180,
             alliance_button
         );
+        UI::font(
+            all,
+            &courier_new_24
+        );
         UI::gradient(
             all,
             lv_color_hex(0x8f8e8d),
@@ -321,6 +325,10 @@
             10,
             215,
             180
+        );
+        UI::font(
+            skills,
+            &courier_new_24
         );
         UI::gradient(
             skills,
@@ -350,13 +358,20 @@
         lv_color_hex(0x8f8e8d),
         lv_color_hex(0x2121221)
         );
+        UI::panel(
+            auton_screen2,
+            440,
+            30,
+            20,
+            5
+        );
         UI::image(
             auton_screen2,
             &field,
             240,
             40
             );
-            
+
 
         // =========================
         // SETTINGS SCREEN
