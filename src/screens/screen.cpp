@@ -108,12 +108,17 @@
             0,
             0
         );
-        UI::panel(
+        lv_obj_t * main_panel = UI::panel(
             main_screen,
             140,
-            280,
+            240,
             0,
             0
+        );
+        UI::gradient(
+            main_panel,
+            lv_color_hex(0x828181),
+            lv_color_hex(0x2e2e2e)
         );
         lv_obj_t * title = UI::panel(
             main_screen,
@@ -146,6 +151,11 @@
             autona_button,
             &courier_new_bold_
         );
+        UI::gradient(
+        autona_button,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0xff0000)
+        ); 
         lv_obj_t * motorss_button = UI::create_button(
             main_screen,
             "MOTORS",
@@ -159,6 +169,11 @@
             motorss_button,
             &courier_new_bold_
         );
+        UI::gradient(
+        motorss_button,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0xff0000)
+        ); 
         lv_obj_t * controller_panel = UI::panel(
             main_screen,
             130,
@@ -181,20 +196,21 @@
          main_screen,
          name.c_str(),
          10,
-         160,
+         157,
          120,
          40,
          name_button
         );
         UI::font(
             namee_button,
-            &courier_new_24
+            &name_font
         );  
         UI::gradient(
-        motorss_button,
-        lv_color_hex(0xffffff),
-        lv_color_hex(0xff0000)
-        );     
+        namee_button,
+        lv_color_hex(0Xa6a4a4),
+        lv_color_hex(0X666565),
+        LV_GRAD_DIR_RADIAL
+        );
         lv_obj_t * settingss_button = UI::create_button(
             main_screen,
             "SETTINGS",
@@ -204,12 +220,59 @@
             40,
             settings_button
         );
+        lv_obj_set_state(settingss_button, LV_STATE_DISABLED, true);
         UI::font(
             settingss_button,
             &courier_new_24
         );
-        
+        UI::gradient(
+        settingss_button,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x000000)
+        ); 
 
+        lv_obj_t * MB = UI::panel(
+            main_screen,
+            311,
+            30,
+            160,
+            10
+        );
+        UI::label(
+         main_screen,
+         "Mechanical Bulls",
+         165,
+         13,
+         &courier_new_32
+        );
+        UI::gradient(
+            MB,
+            lv_color_hex(0Xa6a4a4),
+            lv_color_hex(0X666565),
+            LV_GRAD_DIR_RADIAL
+        );
+        lv_obj_t * avhs = UI::panel(
+            main_screen,
+            270,
+            30,
+            180,
+            45
+        );
+        UI::background(
+            avhs,
+            lv_color_hex(0xa9a9a9)
+        );
+        lv_obj_t * av = UI::label(
+         main_screen,
+         "Arbor View High School",
+         193,
+         48,
+         &lv_font_montserrat_20
+        );
+        UI::text_color(
+            av, 
+            lv_color_hex(0xff0000)
+        );
         // =========================
         // AUTON SCREEN
         // =========================
