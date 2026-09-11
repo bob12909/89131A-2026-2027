@@ -50,7 +50,7 @@ void competition_initialize() {}
  */
 
 void autonomous() {
-	PID(45);
+	PID(90);
 	pros::delay(5);
 	PID(45);
 }

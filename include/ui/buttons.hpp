@@ -8,11 +8,31 @@ namespace UI {
     // Theme
     // ============================================================
 
-    inline const Themes::Colors& theme() {
+    inline const Themes::Colours& theme() {
         return *Themes::current;
     }
+    // ============================================================
+    // gradient
+    // ============================================================
+    inline void gradient(
+    lv_obj_t* obj,
+    lv_color_t start_color,
+    lv_color_t end_color,
+    lv_grad_dir_t direction = LV_GRAD_DIR_HOR
+) {
+    static lv_grad_dsc_t grad;
 
+    grad.dir = direction;
+    grad.stops_count = 2;
 
+    grad.stops[0].color = start_color;
+    grad.stops[0].frac = 0;
+
+    grad.stops[1].color = end_color;
+    grad.stops[1].frac = 255;
+
+    lv_obj_set_style_bg_grad(obj, &grad, 0);
+}
     // ============================================================
     // Basic styling
     // ============================================================
@@ -57,6 +77,13 @@ namespace UI {
         int32_t y
     ) {
         lv_obj_set_pos(obj, x, y);
+    }
+
+    inline void font(
+        lv_obj_t* obj,
+        const lv_font_t* font
+    ) {
+        lv_obj_set_style_text_font(obj, font, 0);
     }
 
 
@@ -223,7 +250,9 @@ inline lv_obj_t* create_button(
 
     inline lv_obj_t* image(
         lv_obj_t* parent,
-        const void* source
+        const void* source,
+        int32_t x,
+        int32_t y
     ) {
         lv_obj_t* img = lv_image_create(parent);
 
@@ -231,6 +260,7 @@ inline lv_obj_t* create_button(
             img,
             source
         );
+        lv_obj_set_pos(img, x, y);
 
         return img;
     }
@@ -294,5 +324,21 @@ inline lv_obj_t* create_button(
             user_data
         );
     }
+    // ============================================================
+    // GIF
+    // ============================================================
 
+    inline lv_obj_t* gif(
+        lv_obj_t* parent,
+        const void* source
+    ) {
+        lv_obj_t* img = lv_gif_create(parent);
+
+        lv_gif_set_src(
+            img,
+            source
+        );
+
+        return img;
+    }
 }

@@ -11,7 +11,7 @@ namespace Themes {
         BRAYDEN
     };
 
-    struct Colors {
+    struct Colours {
         lv_color_t background;
         lv_color_t panel;
 
@@ -25,7 +25,7 @@ namespace Themes {
     };
 
 
-    inline const Colors dark = {
+    inline const Colours dark = {
         .background     = lv_color_hex(0x080808),
         .panel          = lv_color_hex(0x151515),
         .primary        = lv_color_hex(0x444444),
@@ -35,7 +35,7 @@ namespace Themes {
         .accent         = lv_color_hex(0xAAAAAA)
     };
 
-    inline const Colors shy = {
+    inline const Colours shy = {
         .background     = lv_color_hex(0x101010),
         .panel          = lv_color_hex(0x202020),
         .primary        = lv_color_hex(0x8CC63F),
@@ -45,7 +45,7 @@ namespace Themes {
         .accent         = lv_color_hex(0x8CC63F)
     };
 
-    inline const Colors kenzy = {
+    inline const Colours kenzy = {
         .background     = lv_color_hex(0x3a3a3b),
         .panel          = lv_color_hex(0x51495e),
         .primary        = lv_color_hex(0x2e1854),
@@ -54,7 +54,7 @@ namespace Themes {
         .text_secondary = lv_color_hex(0xAAAAAA),
         .accent         = lv_color_hex(0x8CC63F)
     };
-    inline const Colors brayden = {
+    inline const Colours brayden = {
         .background     = lv_color_hex(0x0a0a0f),
         .panel          = lv_color_hex(0x2a0b52),
         .primary        = lv_color_hex(0x6a1b9a),
@@ -64,13 +64,12 @@ namespace Themes {
         .accent         = lv_color_hex(0xc084fc)
     };
 
-    inline const Colors* current = &dark;
+    inline const Colours* current = &dark;
 
 
-    inline const Colors& get(ID id) {
+    inline const Colours& get(ID id) {
 
         switch (id) {
-
             case ID::DARK:
                 return dark;
             case ID::SHY:
