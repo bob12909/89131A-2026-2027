@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "pid-test",
+    "project_name": "main",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -592,9 +592,10 @@
       }
     },
     "upload_options": {
-      "icon": "power",
+      "icon": "alien",
       "slot": 3,
-      "after": "run"
+      "after": "run",
+      "description": "8+ hs of work for ts"
     },
     "use_early_access": false
   }

@@ -16,7 +16,7 @@ void initialize() {
     initializeGUI();
 	Themes::set(Themes::ID::BRAYDEN);
     Screens::init();
-    Screens::show_main();
+    Screens::show_auton();
 }
 
 /**

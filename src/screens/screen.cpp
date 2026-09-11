@@ -8,10 +8,11 @@
     namespace {
 
         lv_obj_t* main_screen;
-        lv_obj_t* auton_screen;
+        lv_obj_t* auton_screen1;
         lv_obj_t* settings_screen;
         lv_obj_t* motors_screen;
         lv_obj_t* debug_screen;
+        lv_obj_t * auton_screen2;
 
     }
 
@@ -54,6 +55,9 @@
     void motors_button(lv_event_t* event) {
         Screens::show_motors();
     }
+    void alliance_button(lv_event_t * event){
+        Screens::show_auton2();
+    }
     void theme_button(lv_event_t* event) {
         ID += 1;
         if (ID == 0)
@@ -92,10 +96,11 @@
 
     void Screens::init() {
         main_screen = lv_obj_create(NULL);
-        auton_screen = lv_obj_create(NULL);
+        auton_screen1 = lv_obj_create(NULL);
         settings_screen = lv_obj_create(NULL);
         motors_screen = lv_obj_create(NULL);
         debug_screen = lv_obj_create(NULL);
+        auton_screen2 = lv_obj_create(NULL);
 
 
         // =========================
@@ -276,19 +281,82 @@
         // =========================
         // AUTON SCREEN
         // =========================
-
-        UI::create_button(
-            auton_screen,
-            "MAIN",
+        
+        lv_obj_t * back_auton1 = UI::create_button(
+            auton_screen1,
+            "BACK",
             10,
-            10,
-            50,
-            50,
+            200,
+            460,
+            40,
             main_button
         );
-        
+        UI::background(
+            auton_screen1,
+            lv_color_hex(0x212121)
+        );
+        UI::gradient(
+        back_auton1,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x2121221)
+        );
+        lv_obj_t * all = UI::create_button(
+            auton_screen1,
+            "Alliance",
+            20,
+            10,
+            215,
+            180,
+            alliance_button
+        );
+        UI::gradient(
+            all,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );  
+        lv_obj_t * skills = UI::create_button(
+            auton_screen1,
+            "Skills",
+            245,
+            10,
+            215,
+            180
+        );
+        UI::gradient(
+            skills,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );           
 
 
+        // =========================
+        // AUTON SCREEN(Alliance)
+        // =========================
+        lv_obj_t * back_auton2 = UI::create_button(
+            auton_screen2,
+            "BACK",
+            10,
+            200,
+            460,
+            40,
+            auton_button
+        );
+        UI::background(
+            auton_screen2,
+            lv_color_hex(0x212121)
+        );
+        UI::gradient(
+        back_auton2,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x2121221)
+        );
+        UI::image(
+            auton_screen2,
+            &field,
+            240,
+            40
+            );
+            
 
         // =========================
         // SETTINGS SCREEN
@@ -349,7 +417,7 @@
     }
 
     void Screens::show_auton() {
-        lv_screen_load(auton_screen);
+        lv_screen_load(auton_screen1);
     }
 
     void Screens::show_settings() {
@@ -361,4 +429,7 @@
     }
     void Screens::show_debug() {
         lv_screen_load(debug_screen);
+    }
+    void Screens::show_auton2() {
+        lv_screen_load(auton_screen2);
     }

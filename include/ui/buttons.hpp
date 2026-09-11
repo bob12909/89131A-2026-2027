@@ -345,4 +345,26 @@ inline lv_obj_t* create_button(
     lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, 0);
     lv_obj_set_style_bg_grad(obj, grad, 0);
 }
+    inline void gradient_transparent(
+    lv_obj_t* obj,
+    lv_color_t color,
+    lv_grad_dir_t direction = LV_GRAD_DIR_HOR
+    )   
+    {
+    lv_grad_dsc_t* grad = new lv_grad_dsc_t;
+
+    grad->dir = direction;
+    grad->stops_count = 2;
+
+    grad->stops[0].color = color;
+    grad->stops[0].opa = LV_OPA_COVER;
+    grad->stops[0].frac = 0;
+
+    grad->stops[1].color = color;
+    grad->stops[1].opa = LV_OPA_TRANSP;
+    grad->stops[1].frac = 255;
+
+    lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, 0);
+    lv_obj_set_style_bg_grad(obj, grad, 0);
+}
 }
