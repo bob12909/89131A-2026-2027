@@ -11,28 +11,7 @@ namespace UI {
     inline const Themes::Colours& theme() {
         return *Themes::current;
     }
-    // ============================================================
-    // gradient
-    // ============================================================
-    inline void gradient(
-    lv_obj_t* obj,
-    lv_color_t start_color,
-    lv_color_t end_color,
-    lv_grad_dir_t direction = LV_GRAD_DIR_HOR
-) {
-    static lv_grad_dsc_t grad;
-
-    grad.dir = direction;
-    grad.stops_count = 2;
-
-    grad.stops[0].color = start_color;
-    grad.stops[0].frac = 0;
-
-    grad.stops[1].color = end_color;
-    grad.stops[1].frac = 255;
-
-    lv_obj_set_style_bg_grad(obj, &grad, 0);
-}
+    
     // ============================================================
     // Basic styling
     // ============================================================
@@ -341,4 +320,26 @@ inline lv_obj_t* create_button(
 
         return img;
     }
+    // ============================================================
+    // gradient
+    // ============================================================
+    inline void gradient(
+    lv_obj_t* obj,
+    lv_color_t start_color,
+    lv_color_t end_color,
+    lv_grad_dir_t direction = LV_GRAD_DIR_HOR
+) {
+    static lv_grad_dsc_t grad;
+
+    grad.dir = direction;
+    grad.stops_count = 2;
+
+    grad.stops[0].color = start_color;
+    grad.stops[0].frac = 0;
+
+    grad.stops[1].color = end_color;
+    grad.stops[1].frac = 255;
+
+    lv_obj_set_style_bg_grad(obj, &grad, 0);
+}
 }

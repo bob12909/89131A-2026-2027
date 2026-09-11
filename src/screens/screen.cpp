@@ -190,11 +190,10 @@
             namee_button,
             &courier_new_24
         );  
-        UI::background(
-            namee_button,
-            UI::gradient(
-                lv_color_hex(0x555555),
-                lv_color_hex(0xaaaaaa)
+        UI::gradient(
+        motorss_button,
+        lv_color_hex(0xffffff),
+        lv_color_hex(0xff0000)
         );     
         lv_obj_t * settingss_button = UI::create_button(
             main_screen,
