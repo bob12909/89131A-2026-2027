@@ -16,7 +16,7 @@ void initialize() {
     initializeGUI();
 	Themes::set(Themes::ID::BRAYDEN);
     Screens::init();
-    Screens::show_auton();
+    Screens::show_auton2();
 }
 
 /**
@@ -75,11 +75,13 @@ void opcontrol() {
 		lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		lefty.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 		righty.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
     	int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		lefty.move(dir + turn);                      // Sets left motor voltage
 		righty.move(dir - turn);                     // Sets right motor voltage
 		pros::delay(20); 
+
 		if (master.get_digital(DIGITAL_R2)) {
     	lift1.move(127);
 		lift2.move(127);

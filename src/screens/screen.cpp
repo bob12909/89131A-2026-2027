@@ -19,9 +19,31 @@
     // -------------------------
     // Button callbacks
     // -------------------------
+    lv_color_t  c1 = lv_color_hex(0x8e0000);
+    lv_color_t  c2 = lv_color_hex(0x400000);
+    double alcc = 0;
     std::string name = "kenzy";
     double name_c = 0;
     std::string theme = "dark";
+    void alc_change(lv_event_t* event){
+        alcc += 1;
+        if (alcc == 0)
+        {
+            c1 = lv_color_hex(0x8e0000);
+            c2 = lv_color_hex(0x400000);
+        }
+        else if (alcc == 1){
+            c1 = lv_color_hex(0x00008e);
+            c2 = lv_color_hex(0x000040);
+        }
+        else if (alcc == 2) {
+            alcc = 0;
+            c1 = lv_color_hex(0x8e0000);
+            c2 = lv_color_hex(0x400000);
+        }
+        Screens::init();
+        Screens::show_auton2();
+    }
     void name_button(lv_event_t* event) {
         name_c += 1;
         if (name_c == 0)
@@ -368,10 +390,23 @@
         UI::image(
             auton_screen2,
             &field,
-            240,
+            250,
             40
             );
-
+            lv_obj_t * alc = UI::create_button(
+                auton_screen2,
+                "",
+                10,
+                40,
+                80,
+                160,
+                alc_change
+            );
+            UI::gradient(
+                alc,
+                lv_color_hex(0x8e0000),
+                lv_color_hex(0x400000)
+            );
 
         // =========================
         // SETTINGS SCREEN
