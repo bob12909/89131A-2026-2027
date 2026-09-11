@@ -340,6 +340,7 @@ inline lv_obj_t* create_button(
     grad.stops[1].color = end_color;
     grad.stops[1].frac = 255;
 
+    lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, 0);
     lv_obj_set_style_bg_grad(obj, &grad, 0);
 }
 }
