@@ -13,6 +13,10 @@
 #include "pros/adi.hpp"
 
 void initialize() {
+	initializeGUI();
+	Themes::set(Themes::ID::BRAYDEN);
+	Screens::init();
+	Screens::show_auton2();
 }
 
 /**

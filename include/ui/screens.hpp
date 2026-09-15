@@ -12,4 +12,5 @@ namespace Screens {
     void show_motors();
     void show_debug();
     void show_auton2();
+    void show_drive();
 }

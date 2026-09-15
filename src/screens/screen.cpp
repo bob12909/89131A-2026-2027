@@ -13,6 +13,7 @@
         lv_obj_t* motors_screen;
         lv_obj_t* debug_screen;
         lv_obj_t * auton_screen2;
+        lv_obj_t * al_screen;
 
     }
 
@@ -42,41 +43,108 @@
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
             side = "red";
+            auton_select = 1;
+            qc1 = lv_color_hex(0x002e00);
+            qc2 = lv_color_hex(0x022000);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
         }
         else if (alcc == 1){
             c1 = lv_color_hex(0x00008e);
             c2 = lv_color_hex(0x000040);
             side = "blue";
+            auton_select = 4;
+            qc1 = lv_color_hex(0x002e00);
+            qc2 = lv_color_hex(0x022000);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
         }
         else if (alcc == 2) {
             alcc = 0;
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
             side = "red";
+            auton_select = 1;
+            qc1 = lv_color_hex(0x002e00);
+            qc2 = lv_color_hex(0x022000);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
         }
         Screens::init();
         Screens::show_auton2();
     }
-    void alss(int q, lv_event_t *event);
+    void alss(int what_q, lv_event_t *event);
     void als_callback(lv_event_t *event) {
     int what_q = (int)(intptr_t)lv_event_get_user_data(event);
     alss(what_q, event);
     }
-    void alss(int q, lv_event_t * event){
+    void alss(int what_q, lv_event_t * event){
         if (side == "red"){
-        if (q == 1){
+        if (what_q == 1){
             auton_select = 1;
-            lv_color_t  qc1 = lv_color_hex(0x00002e);
-            lv_color_t  qc2 = lv_color_hex(0x020020);
-            lv_color_t  qc3 = lv_color_hex(0x8f8e8d);
-            lv_color_t  qc4 = lv_color_hex(0x212121);
-            lv_color_t  qc5 = lv_color_hex(0x8f8e8d);
-            lv_color_t  qc6 = lv_color_hex(0x212121);
+            qc1 = lv_color_hex(0x002e00);
+            qc2 = lv_color_hex(0x022000);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
         }
-        else if (q == 2){
+        else if (what_q == 2){
             auton_select = 2;
+            qc1 = lv_color_hex(0x8f8e8d);
+            qc2 = lv_color_hex(0x212121);
+            qc3 = lv_color_hex(0x002e00);
+            qc4 = lv_color_hex(0x022000);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
+        }
+        else if (what_q == 3){
+            auton_select = 3;
+            qc1 = lv_color_hex(0x8f8e8d);
+            qc2 = lv_color_hex(0x212121);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x002e00);
+            qc6 = lv_color_hex(0x022000);
         }
     }
+    if (side == "blue"){
+        if (what_q == 1){
+            auton_select = 4;
+            qc1 = lv_color_hex(0x002e00);
+            qc2 = lv_color_hex(0x022000);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
+            }
+        else if (what_q == 2){
+            auton_select = 5;
+            qc1 = lv_color_hex(0x8f8e8d);
+            qc2 = lv_color_hex(0x212121);
+            qc3 = lv_color_hex(0x002e00);
+            qc4 = lv_color_hex(0x022000);
+            qc5 = lv_color_hex(0x8f8e8d);
+            qc6 = lv_color_hex(0x212121);
+            }
+        else if (what_q == 3){
+            auton_select = 6;
+            qc1 = lv_color_hex(0x8f8e8d);
+            qc2 = lv_color_hex(0x212121);
+            qc3 = lv_color_hex(0x8f8e8d);
+            qc4 = lv_color_hex(0x212121);
+            qc5 = lv_color_hex(0x002e00);
+            qc6 = lv_color_hex(0x022000);
+            }
+    }
+    Screens::init();
+    Screens::show_auton2();
     }
     void name_button(lv_event_t* event) {
         name_c += 1;
@@ -113,6 +181,9 @@
     }
     void alliance_button(lv_event_t * event){
         Screens::show_auton2();
+    }
+    void drive_button(lv_event_t * event){
+        Screens::show_drive();
     }
     void theme_button(lv_event_t* event) {
         ID += 1;
@@ -421,11 +492,20 @@
             20,
             5
         );
-        UI::image(
+        UI::label(
+            auton_screen2,
+            "Alliance",
+            190,
+            12, 
+            &courier_new_24);
+        UI::image_button(
             auton_screen2,
             &field,
+            155,
+            155,
             250,
-            40
+            40,
+            drive_button
             );
             lv_obj_t * alc = UI::create_button(
                 auton_screen2,
@@ -563,4 +643,7 @@
     }
     void Screens::show_auton2() {
         lv_screen_load(auton_screen2);
+    }
+    void Screens::show_drive() {
+        lv_screen_load(al_screen);
     }

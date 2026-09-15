@@ -250,12 +250,17 @@ inline lv_obj_t* create_button(
         lv_obj_t* parent,
         const void* source,
         int32_t width = 80,
-        int32_t height = 80
+        int32_t height = 80,
+        int32_t x = 0,
+        int32_t y = 0,
+        lv_event_cb_t callback = nullptr,
+        int user_data = 0
+
     ) {
         lv_obj_t* btn = lv_button_create(parent);
 
         size(btn, width, height);
-
+        position(btn, x, y);
         lv_obj_set_style_bg_color(
             btn,
             theme().primary,
@@ -269,7 +274,15 @@ inline lv_obj_t* create_button(
         );
 
         radius(btn, 10);
-
+        
+        if (callback != nullptr) {
+        lv_obj_add_event_cb(
+            btn,
+            callback,
+            LV_EVENT_CLICKED,
+            (void*)(intptr_t)user_data
+        );
+    }
 
         lv_obj_t* img = lv_image_create(btn);
 
