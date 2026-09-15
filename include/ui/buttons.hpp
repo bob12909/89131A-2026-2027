@@ -161,7 +161,7 @@ inline lv_obj_t* create_button(
     int32_t width,
     int32_t height,
     lv_event_cb_t callback = nullptr,
-    void* user_data = nullptr
+    int user_data = 0
 ) {
     lv_obj_t* btn = lv_button_create(parent);
 
@@ -186,14 +186,12 @@ inline lv_obj_t* create_button(
         0
     );
 
-    // Pressed state
     lv_obj_set_style_bg_color(
         btn,
         theme().accent,
         LV_STATE_PRESSED
     );
 
-    // Button text
     lv_obj_t* label_obj = lv_label_create(btn);
 
     lv_label_set_text(
@@ -209,13 +207,12 @@ inline lv_obj_t* create_button(
 
     lv_obj_center(label_obj);
 
-    // Click callback
     if (callback != nullptr) {
         lv_obj_add_event_cb(
             btn,
             callback,
             LV_EVENT_CLICKED,
-            user_data
+            (void*)(intptr_t)user_data
         );
     }
 

@@ -19,30 +19,64 @@
     // -------------------------
     // Button callbacks
     // -------------------------
+    double auton_select = 0;
+    lv_color_t  qc1 = lv_color_hex(0x8f8e8d);
+    lv_color_t  qc2 = lv_color_hex(0x212121);
+    lv_color_t  qc3 = lv_color_hex(0x8f8e8d);
+    lv_color_t  qc4 = lv_color_hex(0x212121);
+    lv_color_t  qc5 = lv_color_hex(0x8f8e8d);
+    lv_color_t  qc6 = lv_color_hex(0x212121);
+    double als = 1;
     lv_color_t  c1 = lv_color_hex(0x8e0000);
     lv_color_t  c2 = lv_color_hex(0x400000);
     double alcc = 0;
     std::string name = "kenzy";
     double name_c = 0;
     std::string theme = "dark";
+    std::string side = "red";
+    
     void alc_change(lv_event_t* event){
         alcc += 1;
         if (alcc == 0)
         {
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
+            side = "red";
         }
         else if (alcc == 1){
             c1 = lv_color_hex(0x00008e);
             c2 = lv_color_hex(0x000040);
+            side = "blue";
         }
         else if (alcc == 2) {
             alcc = 0;
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
+            side = "red";
         }
         Screens::init();
         Screens::show_auton2();
+    }
+    void alss(int q, lv_event_t *event);
+    void als_callback(lv_event_t *event) {
+    int what_q = (int)(intptr_t)lv_event_get_user_data(event);
+    alss(what_q, event);
+    }
+    void alss(int q, lv_event_t * event){
+        if (side == "red"){
+        if (q == 1){
+            auton_select = 1;
+            lv_color_t  qc1 = lv_color_hex(0x00002e);
+            lv_color_t  qc2 = lv_color_hex(0x020020);
+            lv_color_t  qc3 = lv_color_hex(0x8f8e8d);
+            lv_color_t  qc4 = lv_color_hex(0x212121);
+            lv_color_t  qc5 = lv_color_hex(0x8f8e8d);
+            lv_color_t  qc6 = lv_color_hex(0x212121);
+        }
+        else if (q == 2){
+            auton_select = 2;
+        }
+    }
     }
     void name_button(lv_event_t* event) {
         name_c += 1;
@@ -404,9 +438,56 @@
             );
             UI::gradient(
                 alc,
-                lv_color_hex(0x8e0000),
-                lv_color_hex(0x400000)
+                c1,
+                c2
             );
+            lv_obj_t * q1 = UI::create_button(
+                auton_screen2,
+                "Q1",
+                95,
+                40,
+                90,
+                50,
+                als_callback,
+                1
+            );
+            UI::gradient(
+                q1,
+                qc1,
+                qc2
+            );
+            lv_obj_t * q2 = UI::create_button(
+                auton_screen2,
+                "Q2",
+                95,
+                95,
+                90,
+                50,
+                als_callback,
+                2
+            );
+            UI::gradient(
+                q2,
+                qc3,
+                qc4
+            );
+
+            lv_obj_t * sawp = UI::create_button(
+                auton_screen2,
+                "Solo AWP",
+                95,
+                150,
+                90,
+                50,
+                als_callback,
+                3
+            );
+            UI::gradient(
+                sawp,
+                qc5,
+                qc6
+            );
+
 
         // =========================
         // SETTINGS SCREEN

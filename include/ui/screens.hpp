@@ -1,7 +1,9 @@
 #pragma once
 
 #include "liblvgl/lvgl.h"
+#pragma once
 
+extern double auton_select;
 namespace Screens {
     void init();
     void show_main();
