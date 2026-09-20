@@ -593,9 +593,9 @@
     },
     "upload_options": {
       "icon": "alien",
-      "slot": 3,
+      "slot": 2,
       "after": "run",
-      "description": "I hate coding"
+      "description": "13+ hours for ts"
     },
     "use_early_access": false
   }

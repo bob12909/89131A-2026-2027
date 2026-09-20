@@ -20,6 +20,15 @@
     // -------------------------
     // Button callbacks
     // -------------------------
+    std::string auton_name = "";
+    lv_color_t  disconected1 = lv_color_hex(0x8f8e8d);
+    lv_color_t  disconected2 = lv_color_hex(0x212121);
+    lv_color_t  ready1 = lv_color_hex(0x00ff00);
+    lv_color_t  ready2 = lv_color_hex(0x002200);
+    lv_color_t  med1 = lv_color_hex(0xf2c51f);
+    lv_color_t  med2 = lv_color_hex(0xebcc5e);
+    lv_color_t  burn1 = lv_color_hex(0x2f0000);
+    lv_color_t  burn2 = lv_color_hex(0x220000);
     double auton_select = 0;
     lv_color_t  qc1 = lv_color_hex(0x8f8e8d);
     lv_color_t  qc2 = lv_color_hex(0x212121);
@@ -35,11 +44,11 @@
     double name_c = 0;
     std::string theme = "dark";
     std::string side = "red";
-    
     void alc_change(lv_event_t* event){
         alcc += 1;
         if (alcc == 0)
         {
+            auton_name = "Red Q1 selected";
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
             side = "red";
@@ -52,6 +61,7 @@
             qc6 = lv_color_hex(0x212121);
         }
         else if (alcc == 1){
+            auton_name = "Blue Q1 selected";
             c1 = lv_color_hex(0x00008e);
             c2 = lv_color_hex(0x000040);
             side = "blue";
@@ -64,6 +74,7 @@
             qc6 = lv_color_hex(0x212121);
         }
         else if (alcc == 2) {
+            auton_name = "Red Q1 selected";
             alcc = 0;
             c1 = lv_color_hex(0x8e0000);
             c2 = lv_color_hex(0x400000);
@@ -94,6 +105,7 @@
             qc4 = lv_color_hex(0x212121);
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
+            auton_name = "Red Q1 selected";
         }
         else if (what_q == 2){
             auton_select = 2;
@@ -103,6 +115,7 @@
             qc4 = lv_color_hex(0x022000);
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
+            auton_name = "Red Q2 selected";
         }
         else if (what_q == 3){
             auton_select = 3;
@@ -112,6 +125,7 @@
             qc4 = lv_color_hex(0x212121);
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
+            auton_name = "Red Solo AWP selected";
         }
     }
     if (side == "blue"){
@@ -123,6 +137,7 @@
             qc4 = lv_color_hex(0x212121);
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
+            auton_name = "Blue Q1 selected";
             }
         else if (what_q == 2){
             auton_select = 5;
@@ -132,6 +147,7 @@
             qc4 = lv_color_hex(0x022000);
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
+            auton_name = "Blue Q2 selected";
             }
         else if (what_q == 3){
             auton_select = 6;
@@ -141,6 +157,7 @@
             qc4 = lv_color_hex(0x212121);
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
+            auton_name = "Blue Solo AWP selected";
             }
     }
     Screens::init();
@@ -166,21 +183,26 @@
     }
     void settings_button(lv_event_t* event) {
         Screens::show_settings();
+        
     }
 
     void main_button(lv_event_t* event) {
         Screens::show_main();
+        
     }
 
     void auton_button(lv_event_t* event) {
         Screens::show_auton();
+        
     }
 
     void motors_button(lv_event_t* event) {
         Screens::show_motors();
+        
     }
     void alliance_button(lv_event_t * event){
         Screens::show_auton2();
+        
     }
     void drive_button(lv_event_t * event){
         Screens::show_drive();
@@ -228,6 +250,7 @@
         motors_screen = lv_obj_create(NULL);
         debug_screen = lv_obj_create(NULL);
         auton_screen2 = lv_obj_create(NULL);
+        al_screen = lv_obj_create(NULL);
 
 
         // =========================
@@ -570,6 +593,47 @@
 
 
         // =========================
+        // AUTON SELECTED SCREEN
+        // =========================
+            lv_obj_t * back3 = UI::create_button(
+            al_screen,
+            "BACK",
+            10,
+            200,
+            460,
+            40,
+            auton_button
+        );
+        UI::background(
+            al_screen,
+            lv_color_hex(0x212121)
+        );
+        UI::gradient(
+        back3,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x2121221)
+        );
+        UI::panel(
+            al_screen,
+            440,
+            30,
+            20,
+            5
+        );
+        UI::label(
+            al_screen,
+            auton_name.c_str(),
+            190,
+            12, 
+            &courier_new_24
+        );
+        UI::image(
+            al_screen
+        ,&field,
+        80,
+        25
+        );
+        // =========================
         // SETTINGS SCREEN
         // =========================
 
@@ -596,29 +660,62 @@
         // =========================
         // MOTORS SCREEN
         // =========================
-
-        UI::create_button(
+        lv_obj_t * back_motor = UI::create_button(
             motors_screen,
-            "MAIN",
+            "BACK",
             10,
-            10,
-            50,
-            50,
+            200,
+            460,
+            40,
             main_button
         );
-        UI::panel(
+        UI::background(
             motors_screen,
-            150,
-            100,
-            100,
-            25
+            lv_color_hex(0x212121)
         );
-    }
+        UI::gradient(
+        back_motor,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x2121221)
+        );
+        lv_obj_t * motor = UI::panel(
+            motors_screen,
+            440,
+            30,
+            20,
+            5
+        );
+        UI::label(
+            motors_screen,
+            "motors",
+            190,
+            11,
+            &courier_new_24
+        );
+        UI::gradient(
+            motor,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x2121221)
+        );
+        lv_obj_t * L1 = UI::panel(motors_screen,50,50,20,40);
+        lv_obj_t * L2 = UI::panel(motors_screen,50,50,20,95);
+        lv_obj_t * L3 = UI::panel(motors_screen,50,50,20,150);
+        lv_obj_t * R1 = UI::panel(motors_screen,50,50,75,40);
+        lv_obj_t * R2 = UI::panel(motors_screen,50,50,75,95);
+        lv_obj_t * R3 = UI::panel(motors_screen,50,50,75,150);
+
+        lv_obj_t * lift_L1 = UI::panel(motors_screen,50,50,180,40);
+        lv_obj_t * lift_R1 = UI::panel(motors_screen,50,50,235,40);
+
+        lv_obj_t * roller1 = UI::panel(motors_screen,50,50,355,40);
+        lv_obj_t * roler2 = UI::panel(motors_screen,50,50,410,40);
+        
+    
 
     // -------------------------
     // debug
     // -------------------------
-
+    }
     // -------------------------
     // Screen switching
     // -------------------------

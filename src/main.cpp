@@ -16,7 +16,7 @@ void initialize() {
 	initializeGUI();
 	Themes::set(Themes::ID::BRAYDEN);
 	Screens::init();
-	Screens::show_auton2();
+	Screens::show_main();
 }
 
 /**
@@ -49,11 +49,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 
-void autonomous() {
-	PID(90);
-	pros::delay(5);
-	PID(45);
-}
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
