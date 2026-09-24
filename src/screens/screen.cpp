@@ -21,6 +21,8 @@
     // -------------------------
     // Button callbacks
     // -------------------------
+    double awpx = 150;
+    double awpy = 12;
     std::string auton_name = "";
     lv_color_t  disconected1 = lv_color_hex(0x8f8e8d);
     lv_color_t  disconected2 = lv_color_hex(0x212121);
@@ -107,6 +109,8 @@
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
             auton_name = "Red Q1 selected";
+            awpx = 150;
+            awpy = 12;
         }
         else if (what_q == 2){
             auton_select = 2;
@@ -117,6 +121,8 @@
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
             auton_name = "Red Q2 selected";
+            awpx = 150;
+            awpy = 12;
         }
         else if (what_q == 3){
             auton_select = 3;
@@ -127,6 +133,8 @@
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
             auton_name = "Red Solo AWP selected";
+            awpx = 130;
+            awpy = 12;
         }
     }
     if (side == "blue"){
@@ -139,6 +147,8 @@
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
             auton_name = "Blue Q1 selected";
+            awpx = 150;
+            awpy = 12;
             }
         else if (what_q == 2){
             auton_select = 5;
@@ -149,6 +159,8 @@
             qc5 = lv_color_hex(0x8f8e8d);
             qc6 = lv_color_hex(0x212121);
             auton_name = "Blue Q2 selected";
+            awpx = 150;
+            awpy = 12;
             }
         else if (what_q == 3){
             auton_select = 6;
@@ -159,12 +171,21 @@
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
             auton_name = "Blue Solo AWP selected";
+            awpx = 130;
+            awpy = 12;
+
             }
     }
     Screens::init();
     Screens::show_auton2();
+
     }
-    void name_button(lv_event_t* event) {
+    void name_button(int what_s, lv_event_t *event);
+    void name_callback(lv_event_t *event) {
+    int what_s = (int)(intptr_t)lv_event_get_user_data(event);
+    name_button(what_s, event);
+    }
+    void name_button(int what_s, lv_event_t* event) {
         name_c += 1;
         if (name_c == 0)
         {
@@ -179,8 +200,14 @@
             name_c = 0;
             name = "kenzy";
         }
+        if (what_s == 0){
         Screens::init();
         Screens::show_main();
+        }
+        else if(what_s == 1){
+            Screens::init();
+            Screens::show_drive();
+        }
     }
     void settings_button(lv_event_t* event) {
         Screens::show_settings();
@@ -355,7 +382,8 @@
          157,
          120,
          40,
-         name_button
+         name_callback,
+         0
         );
         UI::font(
             namee_button,
@@ -449,7 +477,7 @@
         UI::gradient(
         back_auton1,
         lv_color_hex(0x8f8e8d),
-        lv_color_hex(0x2121221)
+        lv_color_hex(0x212121)
         );
         lv_obj_t * all = UI::create_button(
             auton_screen1,
@@ -507,7 +535,7 @@
         UI::gradient(
         back_auton2,
         lv_color_hex(0x8f8e8d),
-        lv_color_hex(0x2121221)
+        lv_color_hex(0x212121)
         );
         UI::panel(
             auton_screen2,
@@ -612,7 +640,7 @@
         UI::gradient(
         back3,
         lv_color_hex(0x8f8e8d),
-        lv_color_hex(0x2121221)
+        lv_color_hex(0x212121)
         );
         UI::panel(
             al_screen,
@@ -624,8 +652,8 @@
         UI::label(
             al_screen,
             auton_name.c_str(),
-            150,
-            12, 
+            awpx,
+            awpy, 
             &courier_new_24
         );
         UI::image(
@@ -633,6 +661,44 @@
         ,&field,
         240,
         40
+        );
+        lv_obj_t * controller_panel2 = UI::panel(
+            al_screen,
+            130,
+            20,
+            5,
+            135
+        );
+        UI::background(
+            controller_panel2,
+            lv_color_hex(0x555555)
+        );
+        UI::label(
+         al_screen,
+         "CONTROLLER",
+         8,
+         136,
+         &courier_new_20
+        );
+        lv_obj_t * nameee_button = UI::create_button(
+         al_screen,
+         name.c_str(),
+         10,
+         157,
+         120,
+         40,
+         name_callback,
+         1
+        );
+        UI::font(
+            nameee_button,
+            &name_font
+        );  
+        UI::gradient(
+        nameee_button,
+        lv_color_hex(0Xa6a4a4),
+        lv_color_hex(0X666565),
+        LV_GRAD_DIR_RADIAL
         );
         // =========================
         // SETTINGS SCREEN
@@ -677,7 +743,7 @@
         UI::gradient(
         back_motor,
         lv_color_hex(0x8f8e8d),
-        lv_color_hex(0x2121221)
+        lv_color_hex(0x212121)
         );
         lv_obj_t * motor = UI::panel(
             motors_screen,
@@ -696,7 +762,7 @@
         UI::gradient(
             motor,
             lv_color_hex(0x8f8e8d),
-            lv_color_hex(0x2121221)
+            lv_color_hex(0x212121)
         );
         lv_obj_t * L1 = UI::panel(motors_screen,50,50,20,40);
         lv_obj_t * L2 = UI::panel(motors_screen,50,50,20,95);
