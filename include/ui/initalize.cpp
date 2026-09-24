@@ -61,6 +61,5 @@ void initializeGUI() {
     );
 
     lv_display_set_flush_cb(display, my_flush_cb);
-
-    // Your GUI objects go below this point
+    pros::Task lvgl_task(lvgl_task_fn);
 }

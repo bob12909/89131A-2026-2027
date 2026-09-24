@@ -4,6 +4,7 @@
     #include "fonts.hpp"
     #include "imgs.hpp"
     #include <string>
+    #include <list>
     int ID = 0;
     namespace {
 
@@ -623,15 +624,15 @@
         UI::label(
             al_screen,
             auton_name.c_str(),
-            190,
+            150,
             12, 
             &courier_new_24
         );
         UI::image(
             al_screen
         ,&field,
-        80,
-        25
+        240,
+        40
         );
         // =========================
         // SETTINGS SCREEN
@@ -710,11 +711,18 @@
         lv_obj_t * roller1 = UI::panel(motors_screen,50,50,355,40);
         lv_obj_t * roler2 = UI::panel(motors_screen,50,50,410,40);
         
+        
+        
+        
     
 
     // -------------------------
     // debug
     // -------------------------
+     
+
+
+
     }
     // -------------------------
     // Screen switching
