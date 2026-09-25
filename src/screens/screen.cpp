@@ -4,7 +4,6 @@
     #include "fonts.hpp"
     #include "imgs.hpp"
     #include <string>
-    #include <list>
     int ID = 0;
     namespace {
 
@@ -21,8 +20,9 @@
     // -------------------------
     // Button callbacks
     // -------------------------
-    double awpx = 150;
-    double awpy = 12;
+    int32_t what_s2 = 0;
+    int32_t awpx = 150;
+    int32_t awpy = 12;
     std::string auton_name = "";
     lv_color_t  disconected1 = lv_color_hex(0x8f8e8d);
     lv_color_t  disconected2 = lv_color_hex(0x212121);
@@ -133,8 +133,8 @@
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
             auton_name = "Red Solo AWP selected";
-            awpx = 130;
-            awpy = 12;
+            awpx = 105;
+            awpy = 11;
         }
     }
     if (side == "blue"){
@@ -171,8 +171,8 @@
             qc5 = lv_color_hex(0x002e00);
             qc6 = lv_color_hex(0x022000);
             auton_name = "Blue Solo AWP selected";
-            awpx = 130;
-            awpy = 12;
+            awpx = 105;
+            awpy = 11;
 
             }
     }
@@ -206,6 +206,18 @@
         }
         else if(what_s == 1){
             Screens::init();
+            Screens::show_drive();
+        }
+    }
+    void mb_callback(lv_event_t *event) {
+    int what_s2 = (int)(intptr_t)lv_event_get_user_data(event);
+    Screens::show_motors();
+    }
+    void motors_back(lv_event_t * event) {
+        if (what_s2 == 0) {
+            Screens::show_main();
+        }
+        else if (what_s2 == 1) {
             Screens::show_drive();
         }
     }
@@ -284,6 +296,7 @@
         // =========================
         // MAIN SCREEN
         // =========================
+        std::string what_s22 = std::to_string(what_s2);
         
         UI::image(
             main_screen,
@@ -316,7 +329,7 @@
         );
          UI::label(
          main_screen,
-         "89131A",
+         what_s22.c_str(),
          11,
          13,
          &courier_new_32
@@ -346,7 +359,8 @@
             90,
             120,
             40,
-            motors_button
+            mb_callback,
+            0
         );
         UI::font(
             motorss_button,
@@ -656,6 +670,13 @@
             awpy, 
             &courier_new_24
         );
+        
+        UI::label(
+            al_screen,
+            what_s22.c_str(),
+            400,
+            12
+        );
         UI::image(
             al_screen
         ,&field,
@@ -700,6 +721,27 @@
         lv_color_hex(0X666565),
         LV_GRAD_DIR_RADIAL
         );
+         lv_obj_t * motorsss_button = UI::create_button(
+            al_screen,
+            "MOTORS",
+            10,
+            90,
+            120,
+            40,
+            mb_callback,
+            1
+        );
+        UI::font(
+            motorsss_button,
+            &courier_new_bold_
+        );
+        UI::gradient(
+        motorsss_button,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0xff0000)
+        ); 
+        
+
         // =========================
         // SETTINGS SCREEN
         // =========================
@@ -734,7 +776,7 @@
             200,
             460,
             40,
-            main_button
+            motors_back
         );
         UI::background(
             motors_screen,

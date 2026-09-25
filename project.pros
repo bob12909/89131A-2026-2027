@@ -595,7 +595,7 @@
       "icon": "alien",
       "slot": 2,
       "after": "run",
-      "description": "13+ hours for ts"
+      "description": "17+ hours for ts"
     },
     "use_early_access": false
   }

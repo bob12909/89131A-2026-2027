@@ -11,11 +11,11 @@
 #include "ui/initalize.cpp"
 #include "ui/screens.hpp"
 #include "pros/adi.hpp"
-
+ #include <string>
 
 void initialize() {
 	initializeGUI();
-	Themes::set(Themes::ID::BRAYDEN);
+	Themes::set(Themes::ID::DARK);
 	Screens::init();
 	Screens::show_main();
 }
@@ -65,7 +65,13 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	kenzy();
+	if (name == "kenzy"){
+		kenzy();	
+	}
+	else if(name == "shyloh") {
+		shyloh();
+	}
+	
 	
 	while (true) {
 		lift2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);

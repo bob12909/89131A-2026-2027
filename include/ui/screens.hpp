@@ -1,9 +1,11 @@
 #pragma once
 
 #include "liblvgl/lvgl.h"
+#include <string>
 #pragma once
 
 extern double auton_select;
+extern std::string name;
 namespace Screens {
     void init();
     void show_main();
