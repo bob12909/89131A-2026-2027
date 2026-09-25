@@ -15,7 +15,6 @@
 
 void initialize() {
 	initializeGUI();
-	Themes::set(Themes::ID::DARK);
 	Screens::init();
 	Screens::show_main();
 }
@@ -65,6 +64,8 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	
+
 	if (name == "kenzy"){
 		kenzy();	
 	}

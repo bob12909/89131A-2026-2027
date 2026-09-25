@@ -15,6 +15,7 @@
         lv_obj_t* debug_screen;
         lv_obj_t * auton_screen2;
         lv_obj_t * al_screen;
+        lv_obj_t * skills_screen;
 
     }
 
@@ -112,6 +113,7 @@ lv_obj_t* roler2;
     alss(what_q, event);
     }
     void alss(int what_q, lv_event_t * event){
+        
         if (side == "red"){
         if (what_q == 1){
             auton_select = 1;
@@ -188,10 +190,23 @@ lv_obj_t* roler2;
             awpy = 11;
 
             }
+            
     }
-    Screens::init();
-    Screens::show_auton2();
 
+    
+    if(what_q == 4){
+        auton_select = 7;
+        auton_name = "skills";
+        awpx = 200;
+        awpy = 12;
+        Screens::init();
+        Screens::show_drive();
+                
+        }
+        else {
+        Screens::init();
+        Screens::show_auton2();
+       }
     }
      lv_color_t motor_temp_color(double temp){
     // Green: below Level 1 overheat
@@ -211,26 +226,31 @@ lv_obj_t* roler2;
 }
 
 
+    
     void update_motor_colors(lv_timer_t* timer)
+{
+    if (L1 == nullptr || L2 == nullptr || L3 == nullptr ||
+        R1 == nullptr || R2 == nullptr || R3 == nullptr ||
+        lift_L1 == nullptr || lift_R1 == nullptr ||
+        roller1 == nullptr || roler2 == nullptr)
     {
-    // Left drivetrain
+        return;
+    }
+
     UI::background(L1, motor_temp_color(lefty.get_temperature(0)));
     UI::background(L2, motor_temp_color(lefty.get_temperature(1)));
     UI::background(L3, motor_temp_color(lefty.get_temperature(2)));
 
-    // Right drivetrain
     UI::background(R1, motor_temp_color(righty.get_temperature(0)));
     UI::background(R2, motor_temp_color(righty.get_temperature(1)));
     UI::background(R3, motor_temp_color(righty.get_temperature(2)));
 
-    // Lift
     UI::background(lift_L1, motor_temp_color(lift1.get_temperature()));
     UI::background(lift_R1, motor_temp_color(lift2.get_temperature()));
 
-    // Rollers
     UI::background(roller1, motor_temp_color(clawlift.get_temperature()));
     UI::background(roler2, motor_temp_color(claw.get_temperature()));
-    }
+}
     void name_button(int what_s, lv_event_t *event);
     void name_callback(lv_event_t *event) {
     int what_s = (int)(intptr_t)lv_event_get_user_data(event);
@@ -271,6 +291,9 @@ lv_obj_t* roler2;
         else if (what_s2 == 1) {
             Screens::show_drive();
         }
+    }
+    void skills_button(lv_event_t * event) {
+        Screens::show_skills();
     }
     void settings_button(lv_event_t* event) {
         Screens::show_settings();
@@ -342,6 +365,7 @@ lv_obj_t* roler2;
         debug_screen = lv_obj_create(NULL);
         auton_screen2 = lv_obj_create(NULL);
         al_screen = lv_obj_create(NULL);
+        skills_screen = lv_obj_create(NULL);
 
 
         // =========================
@@ -568,7 +592,8 @@ lv_obj_t* roler2;
             245,
             10,
             215,
-            180
+            180,
+            skills_button
         );
         UI::font(
             skills,
@@ -579,8 +604,55 @@ lv_obj_t* roler2;
             lv_color_hex(0x8f8e8d),
             lv_color_hex(0x212121)
         );           
-
-
+        // =========================
+        // AUTON SCREEN(skills)
+        // =========================
+        lv_obj_t * back_skills = UI::create_button(
+            skills_screen,
+            "BACK",
+            10,
+            200,
+            460,
+            40,
+            auton_button
+        );
+        UI::background(
+            skills_screen,
+            lv_color_hex(0x212121)
+        );
+        UI::gradient(
+        back_skills,
+        lv_color_hex(0x8f8e8d),
+        lv_color_hex(0x212121)
+        );
+        lv_obj_t * top3 = UI::panel(
+            skills_screen,
+            440,
+            30,
+            20,
+            5
+        );
+        UI::gradient(
+            top3,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );
+        UI::label(
+            skills_screen,
+            "Skills",
+            190,
+            12, 
+            &courier_new_24);
+        UI::image_button(
+            skills_screen,
+            &field,
+            155,
+            155,
+            170,
+            40,
+            als_callback,
+            4
+            );
         // =========================
         // AUTON SCREEN(Alliance)
         // =========================
@@ -602,12 +674,17 @@ lv_obj_t* roler2;
         lv_color_hex(0x8f8e8d),
         lv_color_hex(0x212121)
         );
-        UI::panel(
+        lv_obj_t * top2 = UI::panel(
             auton_screen2,
             440,
             30,
             20,
             5
+        );
+        UI::gradient(
+            top2,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
         );
         UI::label(
             auton_screen2,
@@ -707,16 +784,22 @@ lv_obj_t* roler2;
         lv_color_hex(0x8f8e8d),
         lv_color_hex(0x212121)
         );
-        UI::panel(
+        lv_obj_t * top = UI::panel(
             al_screen,
             440,
             30,
             20,
             5
         );
+        UI::gradient(
+            top,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );
         UI::label(
             al_screen,
-            auton_name.c_str(),
+            auton_name.
+            c_str(),
             awpx,
             awpy, 
             &courier_new_24
@@ -852,25 +935,41 @@ lv_obj_t* roler2;
             lv_color_hex(0x8f8e8d),
             lv_color_hex(0x212121)
         );
-        
-        lv_obj_t * L1 = UI::panel(motors_screen,50,50,20,40);
-        lv_obj_t * L2 = UI::panel(motors_screen,50,50,20,95);
-        lv_obj_t * L3 = UI::panel(motors_screen,50,50,20,150);
-        lv_obj_t * R1 = UI::panel(motors_screen,50,50,75,40);
-        lv_obj_t * R2 = UI::panel(motors_screen,50,50,75,95);
-        lv_obj_t * R3 = UI::panel(motors_screen,50,50,75,150);
+        lv_timer_t* motor_temp_timer = nullptr;
+        L1 = UI::panel(motors_screen,50,50,20,40);
+        L2 = UI::panel(motors_screen,50,50,20,95);
+        L3 = UI::panel(motors_screen,50,50,20,150);
 
-        lv_obj_t * lift_L1 = UI::panel(motors_screen,50,50,180,40);
-        lv_obj_t * lift_R1 = UI::panel(motors_screen,50,50,235,40);
+        R1 = UI::panel(motors_screen,50,50,75,40);
+        R2 = UI::panel(motors_screen,50,50,75,95);
+        R3 = UI::panel(motors_screen,50,50,75,150);
 
-        lv_obj_t * roller1 = UI::panel(motors_screen,50,50,355,40);
-        lv_obj_t * roler2 = UI::panel(motors_screen,50,50,410,40);
-       
-        lv_timer_create(
+        lift_L1 = UI::panel(motors_screen,50,50,180,40);
+        lift_R1 = UI::panel(motors_screen,50,50,235,40);
+
+        roller1 = UI::panel(motors_screen,50,50,355,40);
+        roler2 = UI::panel(motors_screen,50,50,410,40);
+        UI::label(motors_screen, "L1", 35, 55);
+        UI::label(motors_screen, "L2", 35, 110);
+        UI::label(motors_screen, "L3", 35, 165);
+
+        UI::label(motors_screen, "R1", 90, 55);
+        UI::label(motors_screen, "R2", 90, 110);
+        UI::label(motors_screen, "R3", 90, 165);
+
+        UI::label(motors_screen, "Lift 1", 185, 55);
+        UI::label(motors_screen, "Lift 2", 240, 55);
+
+        UI::label(motors_screen, "Roll 1", 360, 55);
+        UI::label(motors_screen, "Roll 2", 415, 55);
+        if (motor_temp_timer == nullptr)
+{
+    motor_temp_timer = lv_timer_create(
         update_motor_colors,
         500,
         nullptr
-        );
+    );
+}
         
         
         
@@ -912,4 +1011,7 @@ lv_obj_t* roler2;
     }
     void Screens::show_drive() {
         lv_screen_load(al_screen);
+    }
+    void Screens::show_skills() {
+        lv_screen_load(skills_screen);
     }
