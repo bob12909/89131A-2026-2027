@@ -326,22 +326,22 @@ lv_obj_t* roler2;
         if (ID == 0)
         {
          Themes::set(Themes::ID::DARK);   
-         name = "dark";
+         
         }
         else if (ID == 1)
         {
          Themes::set(Themes::ID::SHY);   
-         name = "shy";
+         
         }
         else if (ID == 2)
         {
          Themes::set(Themes::ID::KENZY);   
-         name = "kenzy";
+         
         }
         else if (ID == 3)
         {
          Themes::set(Themes::ID::BRAYDEN);
-        name = "brayden";   
+          
         }
         else if (ID == 4)
         {
@@ -493,7 +493,7 @@ lv_obj_t* roler2;
             40,
             settings_button
         );
-        lv_obj_set_state(settingss_button, LV_STATE_DISABLED, true);
+        //lv_obj_set_state(settingss_button, LV_STATE_DISABLED, true);
         UI::font(
             settingss_button,
             &courier_new_24
@@ -874,25 +874,49 @@ lv_obj_t* roler2;
         // =========================
         // SETTINGS SCREEN
         // =========================
-
-        UI::create_button(
+       lv_obj_t * back_settings = UI::create_button(
             settings_screen,
-            "MAIN",
+            "BACK",
             10,
-            10,
-            50,
-            50,
+            200,
+            460,
+            40,
             main_button
         );
-        UI::create_button(
+
+        UI::background(
             settings_screen,
-            "THEME",
-            100,
-            10,
-            100,
-            50,
-            theme_button
+            lv_color_hex(0x212121)
         );
+
+        UI::gradient(
+            back_settings,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );
+
+        lv_obj_t * setting = UI::panel(
+            settings_screen,
+            200,
+            30,
+            20,
+            5
+        );
+
+        UI::gradient(
+            setting,
+            lv_color_hex(0x8f8e8d),
+            lv_color_hex(0x212121)
+        );
+
+        UI::label(
+            settings_screen,
+            "Settings",
+            70,
+            11,
+            &courier_new_24
+        );
+        
 
 
         // =========================
