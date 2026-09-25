@@ -1,9 +1,12 @@
 
-#include "main.h"
-#include "pros/llemu.hpp"
-#include "pros/rtos.hpp"
-#include <math.h>
-#include "subsystem.hpp"
+#include "PID.hpp"
+inline pros::Imu Bob(19);
+inline pros::MotorGroup lefty({-15, -1, 3});
+inline pros::MotorGroup righty({-9, 16, 10});
+inline pros::Rotation x(20);
+inline pros::Rotation y(21);
+inline pros::Motor lift1(-6);
+inline pros::Motor lift2(8);
 const double PI = 3.14159265358979323846;
 double ki = 0;
 double kp = 0;
@@ -50,12 +53,12 @@ void PID(double deg) {
     lefty.move(0);
     righty.move(0);
 }
+    
 void odom(double xd,double yd) {
     kp = 3;
     ki = 0.01;
     kd = 12;
-    y.reset_position();
-    x.reset_position();
+    
     while (true) {
         //
         double xerror = xd - (x.get_position()/36000)* wheel;

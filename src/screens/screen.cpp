@@ -376,8 +376,8 @@ lv_obj_t* roler2;
         UI::image(
             main_screen,
             &bg1,
-            0,
-            0
+            210,
+            120
         );
         lv_obj_t * main_panel = UI::panel(
             main_screen,

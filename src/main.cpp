@@ -12,8 +12,11 @@
 #include "ui/screens.hpp"
 #include "pros/adi.hpp"
  #include <string>
+ #include "subsystem.hpp"
 
 void initialize() {
+	y.reset_position();
+    x.reset_position();
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
