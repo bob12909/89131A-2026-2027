@@ -1,6 +1,7 @@
     #include "ui/screens.hpp"
     #include "ui/themes.hpp"
     #include "ui/buttons.hpp"
+    #include "subsystem.hpp"
     #include "fonts.hpp"
     #include "imgs.hpp"
     #include <string>
@@ -20,6 +21,18 @@
     // -------------------------
     // Button callbacks
     // -------------------------
+    lv_obj_t* L1;
+lv_obj_t* L2;
+lv_obj_t* L3;
+lv_obj_t* R1;
+lv_obj_t* R2;
+lv_obj_t* R3;
+
+lv_obj_t* lift_L1;
+lv_obj_t* lift_R1;
+
+lv_obj_t* roller1;
+lv_obj_t* roler2;
     int32_t what_s2 = 0;
     int32_t awpx = 150;
     int32_t awpy = 12;
@@ -180,6 +193,44 @@
     Screens::show_auton2();
 
     }
+     lv_color_t motor_temp_color(double temp){
+    // Green: below Level 1 overheat
+    if (temp < 55.0)
+    {
+        return lv_color_hex(0x00FF00);
+    }
+
+    // Yellow: Level 1 overheat up to 80%
+    if (temp < 59.0)
+    {
+        return lv_color_hex(0xFFFF00);
+    }
+
+    // Red: 80% to maximum
+    return lv_color_hex(0xFF0000);
+}
+
+
+    void update_motor_colors(lv_timer_t* timer)
+    {
+    // Left drivetrain
+    UI::background(L1, motor_temp_color(lefty.get_temperature(0)));
+    UI::background(L2, motor_temp_color(lefty.get_temperature(1)));
+    UI::background(L3, motor_temp_color(lefty.get_temperature(2)));
+
+    // Right drivetrain
+    UI::background(R1, motor_temp_color(righty.get_temperature(0)));
+    UI::background(R2, motor_temp_color(righty.get_temperature(1)));
+    UI::background(R3, motor_temp_color(righty.get_temperature(2)));
+
+    // Lift
+    UI::background(lift_L1, motor_temp_color(lift1.get_temperature()));
+    UI::background(lift_R1, motor_temp_color(lift2.get_temperature()));
+
+    // Rollers
+    UI::background(roller1, motor_temp_color(clawlift.get_temperature()));
+    UI::background(roler2, motor_temp_color(claw.get_temperature()));
+    }
     void name_button(int what_s, lv_event_t *event);
     void name_callback(lv_event_t *event) {
     int what_s = (int)(intptr_t)lv_event_get_user_data(event);
@@ -210,7 +261,7 @@
         }
     }
     void mb_callback(lv_event_t *event) {
-    int what_s2 = (int)(intptr_t)lv_event_get_user_data(event);
+    what_s2 = (int)(intptr_t)lv_event_get_user_data(event);
     Screens::show_motors();
     }
     void motors_back(lv_event_t * event) {
@@ -296,7 +347,7 @@
         // =========================
         // MAIN SCREEN
         // =========================
-        std::string what_s22 = std::to_string(what_s2);
+        
         
         UI::image(
             main_screen,
@@ -329,7 +380,7 @@
         );
          UI::label(
          main_screen,
-         what_s22.c_str(),
+         "89131A",
          11,
          13,
          &courier_new_32
@@ -671,14 +722,9 @@
             &courier_new_24
         );
         
-        UI::label(
-            al_screen,
-            what_s22.c_str(),
-            400,
-            12
-        );
+        
         UI::image(
-            al_screen
+        al_screen
         ,&field,
         240,
         40
@@ -806,6 +852,7 @@
             lv_color_hex(0x8f8e8d),
             lv_color_hex(0x212121)
         );
+        
         lv_obj_t * L1 = UI::panel(motors_screen,50,50,20,40);
         lv_obj_t * L2 = UI::panel(motors_screen,50,50,20,95);
         lv_obj_t * L3 = UI::panel(motors_screen,50,50,20,150);
@@ -818,6 +865,12 @@
 
         lv_obj_t * roller1 = UI::panel(motors_screen,50,50,355,40);
         lv_obj_t * roler2 = UI::panel(motors_screen,50,50,410,40);
+       
+        lv_timer_create(
+        update_motor_colors,
+        500,
+        nullptr
+        );
         
         
         
