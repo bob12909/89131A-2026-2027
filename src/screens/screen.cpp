@@ -347,7 +347,7 @@ lv_obj_t* roler2;
         {
          ID = 0;
          Themes::set(Themes::ID::DARK);   
-         name = "dark";
+         
         }
         Screens::init();
         Screens::show_settings();
@@ -871,10 +871,12 @@ lv_obj_t* roler2;
         ); 
         
 
+     
         // =========================
         // SETTINGS SCREEN
         // =========================
-       lv_obj_t * back_settings = UI::create_button(
+
+        lv_obj_t * back_settings = UI::create_button(
             settings_screen,
             "BACK",
             10,
@@ -895,28 +897,235 @@ lv_obj_t* roler2;
             lv_color_hex(0x212121)
         );
 
-        lv_obj_t * setting = UI::panel(
+
+
+
+        // =========================
+        // COLOR
+        // =========================
+
+        lv_obj_t * color_setting = UI::panel(
             settings_screen,
-            200,
+            100,
             30,
-            20,
-            5
+            110,
+            8
         );
 
         UI::gradient(
-            setting,
-            lv_color_hex(0x8f8e8d),
-            lv_color_hex(0x212121)
+            color_setting,
+            lv_color_hex(0xCCCCCC),
+            lv_color_hex(0xE06666)
         );
 
         UI::label(
             settings_screen,
-            "Settings",
-            70,
-            11,
-            &courier_new_24
+            "Color:",
+            120,
+            12,
+            &courier_new_20
         );
-        
+
+
+        // =========================
+        // BACKGROUND
+        // =========================
+
+        lv_obj_t * background_setting = UI::panel(
+            settings_screen,
+            100,
+            30,
+            6,
+            8
+        );
+
+        UI::gradient(
+            background_setting,
+            lv_color_hex(0xBFBFBF),
+            lv_color_hex(0x737373)
+        );
+
+        UI::label(
+            settings_screen,
+            "BG:",
+            25,
+            12,
+            &courier_new_20
+        );
+
+
+        // =========================
+        // AV HS COLOR BUTTON
+        // =========================
+
+        lv_obj_t * avhs_color = UI::create_button(
+            settings_screen,
+            "AV HS",
+            110, 39, 100, 24,
+            theme_button
+        );
+
+        UI::font(
+            avhs_color,
+            &courier_new_20
+        );
+
+        UI::background(
+            avhs_color,
+            lv_color_hex(0x93C47D)
+        );
+
+
+        // =========================
+        // AV HS BACKGROUND BUTTON
+        // =========================
+
+        lv_obj_t * avhs_background = UI::create_button(
+            settings_screen,
+            "AV HS",
+            6, 39, 100, 24,
+            theme_button
+        );
+
+        UI::font(
+            avhs_background,
+            &courier_new_20
+        );
+
+        UI::background(
+            avhs_background,
+            lv_color_hex(0x93C47D)
+        );
+
+
+        // =========================
+        // OTHER BUTTONS - LEFT
+        // =========================
+
+        lv_obj_t * other_l1 = UI::create_button(
+            settings_screen,
+            "Other",
+            6, 63, 100, 24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_l1,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_l2 = UI::create_button(
+            settings_screen,
+            "Other",
+            6, 92, 100, 24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_l2,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_l3 = UI::create_button(
+            settings_screen,
+            "Other",
+            6, 121, 100, 24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_l3,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_l4 = UI::create_button(
+            settings_screen,
+            "Other",
+            6, 150, 100, 24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_l4,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        // =========================
+        // OTHER BUTTONS - RIGHT
+        // =========================
+
+        lv_obj_t * other_r1 = UI::create_button(
+            settings_screen,
+            "Other",
+            110, 63, 100, 24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_r1,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_r2 = UI::create_button(
+            settings_screen,
+            "Other",
+            110,
+            92,
+            100,
+            24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_r2,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_r3 = UI::create_button(
+            settings_screen,
+            "Other",
+            110,
+            121,
+            100,
+            24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_r3,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
+
+        lv_obj_t * other_r4 = UI::create_button(
+            settings_screen,
+            "Other",
+            110,
+            150,
+            100,
+            24,
+            theme_button
+        );
+
+        UI::gradient(
+            other_r4,
+            lv_color_hex(0x4D4D4D),
+            lv_color_hex(0x000000)
+        );
+
 
 
         // =========================
