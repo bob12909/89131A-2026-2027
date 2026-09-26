@@ -74,6 +74,9 @@ void odom(double xd,double yd) {
         //
         lefty.move(left);
         righty.move(right);
+        if ( left == 0 || right == 0){
+            break;
+        }
     }
 }
 double up = 1;

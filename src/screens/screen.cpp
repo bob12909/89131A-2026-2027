@@ -251,6 +251,15 @@ lv_obj_t* roler2;
     UI::background(roller1, motor_temp_color(clawlift.get_temperature()));
     UI::background(roler2, motor_temp_color(claw.get_temperature()));
 }
+
+
+
+
+
+
+
+
+
     void name_button(int what_s, lv_event_t *event);
     void name_callback(lv_event_t *event) {
     int what_s = (int)(intptr_t)lv_event_get_user_data(event);
@@ -321,38 +330,6 @@ lv_obj_t* roler2;
     void drive_button(lv_event_t * event){
         Screens::show_drive();
     }
-    void theme_button(lv_event_t* event) {
-        ID += 1;
-        if (ID == 0)
-        {
-         Themes::set(Themes::ID::DARK);   
-         
-        }
-        else if (ID == 1)
-        {
-         Themes::set(Themes::ID::SHY);   
-         
-        }
-        else if (ID == 2)
-        {
-         Themes::set(Themes::ID::KENZY);   
-         
-        }
-        else if (ID == 3)
-        {
-         Themes::set(Themes::ID::BRAYDEN);
-          
-        }
-        else if (ID == 4)
-        {
-         ID = 0;
-         Themes::set(Themes::ID::DARK);   
-         
-        }
-        Screens::init();
-        Screens::show_settings();
-        
-    }
     // -------------------------
     // Initialize screens
     // -------------------------
@@ -372,12 +349,28 @@ lv_obj_t* roler2;
         // MAIN SCREEN
         // =========================
         
+        UI::background(
+            main_screen,
+            lv_color_hex(0x000000)
+        );
         
         UI::image(
             main_screen,
-            &bg1,
+            &MrHat,
+            100,
+            150
+        );
+        UI::image(
+            main_screen,
+            &cloud,
+            320,
+            150
+        );
+        UI::image(
+            main_screen,
+            &huh,
             210,
-            120
+            70
         );
         lv_obj_t * main_panel = UI::panel(
             main_screen,
@@ -424,8 +417,8 @@ lv_obj_t* roler2;
         );
         UI::gradient(
         autona_button,
-        lv_color_hex(0x8f8e8d),
-        lv_color_hex(0xff0000)
+        bc1,
+        bc2
         ); 
         lv_obj_t * motorss_button = UI::create_button(
             main_screen,
@@ -443,8 +436,8 @@ lv_obj_t* roler2;
         );
         UI::gradient(
         motorss_button,
-        lv_color_hex(0x8f8e8d),
-        lv_color_hex(0xff0000)
+        bc1,
+        bc2
         ); 
         lv_obj_t * controller_panel = UI::panel(
             main_screen,
@@ -900,9 +893,6 @@ lv_obj_t* roler2;
 
 
 
-        // =========================
-        // COLOR
-        // =========================
 
         lv_obj_t * color_setting = UI::panel(
             settings_screen,
@@ -914,8 +904,8 @@ lv_obj_t* roler2;
 
         UI::gradient(
             color_setting,
-            lv_color_hex(0xCCCCCC),
-            lv_color_hex(0xE06666)
+            bc1,
+            bc2
         );
 
         UI::label(
@@ -927,9 +917,7 @@ lv_obj_t* roler2;
         );
 
 
-        // =========================
-        // BACKGROUND
-        // =========================
+
 
         lv_obj_t * background_setting = UI::panel(
             settings_screen,
@@ -954,15 +942,11 @@ lv_obj_t* roler2;
         );
 
 
-        // =========================
-        // AV HS COLOR BUTTON
-        // =========================
 
         lv_obj_t * avhs_color = UI::create_button(
             settings_screen,
             "AV HS",
-            110, 39, 100, 24,
-            theme_button
+            110, 39, 100, 24
         );
 
         UI::font(
@@ -976,15 +960,11 @@ lv_obj_t* roler2;
         );
 
 
-        // =========================
-        // AV HS BACKGROUND BUTTON
-        // =========================
 
         lv_obj_t * avhs_background = UI::create_button(
             settings_screen,
             "AV HS",
-            6, 39, 100, 24,
-            theme_button
+            6, 39, 100, 24
         );
 
         UI::font(
@@ -998,16 +978,12 @@ lv_obj_t* roler2;
         );
 
 
-        // =========================
-        // OTHER BUTTONS - LEFT
-        // =========================
 
         lv_obj_t * other_l1 = UI::create_button(
             settings_screen,
             "Other",
-            6, 63, 100, 24,
-            theme_button
-        );
+            6, 63, 100, 24
+            );
 
         UI::gradient(
             other_l1,
@@ -1019,8 +995,7 @@ lv_obj_t* roler2;
         lv_obj_t * other_l2 = UI::create_button(
             settings_screen,
             "Other",
-            6, 92, 100, 24,
-            theme_button
+            6, 92, 100, 24
         );
 
         UI::gradient(
@@ -1033,8 +1008,7 @@ lv_obj_t* roler2;
         lv_obj_t * other_l3 = UI::create_button(
             settings_screen,
             "Other",
-            6, 121, 100, 24,
-            theme_button
+            6, 121, 100, 24
         );
 
         UI::gradient(
@@ -1047,8 +1021,7 @@ lv_obj_t* roler2;
         lv_obj_t * other_l4 = UI::create_button(
             settings_screen,
             "Other",
-            6, 150, 100, 24,
-            theme_button
+            6, 150, 100, 24
         );
 
         UI::gradient(
@@ -1057,16 +1030,10 @@ lv_obj_t* roler2;
             lv_color_hex(0x000000)
         );
 
-
-        // =========================
-        // OTHER BUTTONS - RIGHT
-        // =========================
-
         lv_obj_t * other_r1 = UI::create_button(
             settings_screen,
             "Other",
-            110, 63, 100, 24,
-            theme_button
+            110, 63, 100, 24
         );
 
         UI::gradient(
@@ -1082,8 +1049,7 @@ lv_obj_t* roler2;
             110,
             92,
             100,
-            24,
-            theme_button
+            24
         );
 
         UI::gradient(
@@ -1099,8 +1065,7 @@ lv_obj_t* roler2;
             110,
             121,
             100,
-            24,
-            theme_button
+            24
         );
 
         UI::gradient(
@@ -1116,8 +1081,7 @@ lv_obj_t* roler2;
             110,
             150,
             100,
-            24,
-            theme_button
+            24
         );
 
         UI::gradient(
@@ -1125,7 +1089,6 @@ lv_obj_t* roler2;
             lv_color_hex(0x4D4D4D),
             lv_color_hex(0x000000)
         );
-
 
 
         // =========================

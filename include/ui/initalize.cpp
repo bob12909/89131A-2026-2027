@@ -4,7 +4,6 @@
 #include "liblvgl/misc/lv_types.h"
 #include "liblvgl/themes/default/lv_theme_default.h"
 #include "liblvgl/tick/lv_tick.h"
-#include "themes.hpp"
 #include "pros/colors.hpp"
 #include "pros/rtos.hpp"
 #include "pros/screen.hpp"

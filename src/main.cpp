@@ -17,6 +17,7 @@
 void initialize() {
 	y.reset_position();
     x.reset_position();
+	Themes::set(Themes::ID::DSA);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
@@ -67,17 +68,13 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	
-
-	if (name == "kenzy"){
+	while (true) {
+		if (name == "kenzy"){
 		kenzy();	
 	}
 	else if(name == "shyloh") {
 		shyloh();
 	}
-	
-	
-	while (true) {
 		lift2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		lefty.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);

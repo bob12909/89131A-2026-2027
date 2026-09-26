@@ -3,7 +3,8 @@
 #include "liblvgl/lvgl.h"
 #include <string>
 #pragma once
-
+extern lv_color_t  bc1;
+extern lv_color_t  bc2;
 extern double auton_select;
 extern std::string name;
 namespace Screens {
