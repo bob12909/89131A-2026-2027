@@ -417,8 +417,8 @@ lv_obj_t* roler2;
         );
         UI::gradient(
         autona_button,
-        bc1,
-        bc2
+        Themes::current->bc1,
+        Themes::current->bc2
         ); 
         lv_obj_t * motorss_button = UI::create_button(
             main_screen,
@@ -436,8 +436,8 @@ lv_obj_t* roler2;
         );
         UI::gradient(
         motorss_button,
-        bc1,
-        bc2
+        Themes::current->bc1,
+        Themes::current->bc2
         ); 
         lv_obj_t * controller_panel = UI::panel(
             main_screen,
@@ -904,8 +904,8 @@ lv_obj_t* roler2;
 
         UI::gradient(
             color_setting,
-            bc1,
-            bc2
+            Themes::current->bc1,
+            Themes::current->bc2
         );
 
         UI::label(

@@ -17,7 +17,7 @@
 void initialize() {
 	y.reset_position();
     x.reset_position();
-	Themes::set(Themes::ID::DSA);
+	Themes::set(Themes::ID::Dog);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();

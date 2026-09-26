@@ -30,14 +30,14 @@ namespace Themes {
 
     inline const Colours AVHS = {
         .background   = lv_color_hex(0x080808),
-        .bc1          = lv_color_hex(0x151515),
-        .bc2          = lv_color_hex(0x000000)
+        .bc1          = lv_color_hex(0x8f8e8d),
+        .bc2          = lv_color_hex(0xff0000)
     };
 
     inline const Colours MC = {
         .background   = lv_color_hex(0x101010),
-        .bc1          = lv_color_hex(0x202020),
-        .bc2          = lv_color_hex(0x000000)
+        .bc1          = lv_color_hex(0x111111),
+        .bc2          = lv_color_hex(0xff0000)
     };
 
     inline const Colours DSA = {
@@ -47,8 +47,8 @@ namespace Themes {
     };
     inline const Colours Dog = {
         .background   = lv_color_hex(0x0a0a0f),
-        .bc1          = lv_color_hex(0x2a0b52),
-        .bc2          = lv_color_hex(0x000000)
+        .bc1          = lv_color_hex(0XFFFFFF),
+        .bc2          = lv_color_hex(0x827858)
     };
 
     inline const Colours* current = &AVHS;
