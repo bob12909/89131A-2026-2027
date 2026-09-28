@@ -82,7 +82,7 @@ namespace UI {
 
 
     inline lv_obj_t* screen() {
-        return screen(theme().background);
+        return screen(theme().primary);
     }
 
 

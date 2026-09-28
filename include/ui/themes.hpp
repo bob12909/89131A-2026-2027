@@ -1,5 +1,6 @@
 #pragma once
 
+#include "imgs.hpp"
 #include "liblvgl/lvgl.h"
 
 namespace Themes {
@@ -12,7 +13,9 @@ namespace Themes {
     };
 
     struct Colours {
-        lv_color_t background;
+        const lv_image_dsc_t* background;
+        int32_t bgx = 0;
+        int32_t bgy = 0;
         lv_color_t bc1;
         lv_color_t bc2;
 
@@ -29,24 +32,33 @@ namespace Themes {
 
 
     inline const Colours AVHS = {
-        .background   = lv_color_hex(0x080808),
+        .background   = &bg1,
+        .bgx          = 0,
+        .bgy          = 0,
         .bc1          = lv_color_hex(0x8f8e8d),
         .bc2          = lv_color_hex(0xff0000)
+        
     };
 
     inline const Colours MC = {
-        .background   = lv_color_hex(0x101010),
+        .background   = &mb,
+        .bgx          = 0,
+        .bgy          = 0,
         .bc1          = lv_color_hex(0x111111),
-        .bc2          = lv_color_hex(0xff0000)
+        .bc2          = lv_color_hex(0xfe3131)
     };
 
     inline const Colours DSA = {
-        .background   = lv_color_hex(0x3a3a3b),
+        .background   = &dsa,
+        .bgx          = 0,
+        .bgy          = 0,
         .bc1          = lv_color_hex(0x8e8f8d),
         .bc2          = lv_color_hex(0x877329)
     };
     inline const Colours Dog = {
-        .background   = lv_color_hex(0x0a0a0f),
+        .background   = &Dogs,
+        .bgx          = 0,
+        .bgy          = 0,
         .bc1          = lv_color_hex(0XFFFFFF),
         .bc2          = lv_color_hex(0x827858)
     };

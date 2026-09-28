@@ -356,21 +356,9 @@ lv_obj_t* roler2;
         
         UI::image(
             main_screen,
-            &MrHat,
-            100,
-            150
-        );
-        UI::image(
-            main_screen,
-            &cloud,
-            320,
-            150
-        );
-        UI::image(
-            main_screen,
-            &huh,
-            210,
-            70
+            Themes::current->background,
+            Themes::current->bgx,
+            Themes::current->bgy
         );
         lv_obj_t * main_panel = UI::panel(
             main_screen,
@@ -537,7 +525,7 @@ lv_obj_t* roler2;
         );
         UI::text_color(
             av, 
-            lv_color_hex(0xff0000)
+            Themes::current->bc2
         );
         // =========================
         // AUTON SCREEN
@@ -859,8 +847,8 @@ lv_obj_t* roler2;
         );
         UI::gradient(
         motorsss_button,
-        lv_color_hex(0x8f8e8d),
-        lv_color_hex(0xff0000)
+        Themes::current->bc1,
+        Themes::current->bc2
         ); 
         
 
