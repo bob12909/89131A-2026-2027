@@ -68,6 +68,9 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	intake_claw.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	clawlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	while (true) {
 		if (name == "kenzy"){
 		kenzy();	
@@ -75,51 +78,11 @@ void opcontrol() {
 	else if(name == "shyloh") {
 		shyloh();
 	}
-		lift2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-		lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+		
+		
 		lefty.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 		righty.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
-    	int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		lefty.move(dir + turn);                      // Sets left motor voltage
-		righty.move(dir - turn);                     // Sets right motor voltage
-		pros::delay(20); 
-
-		if (master.get_digital(DIGITAL_R2)) {
-    	lift1.move(127);
-		lift2.move(127);
-		}
-		else if (master.get_digital(DIGITAL_R1)) {
-			if (pros::c::motor_get_position(6) > 100) {
-				lift1.move(-127);
-				lift2.move(-127);
-			}
-			else { 
-				lift1.move(20);
-				lift2.move(20);
-			}
-		
-			if (pros::c::motor_get_position(8) > 100) {
-				lift1.move(-127);
-				lift2.move(-127);
-			}
-			else { 
-				lift1.move(20);
-				lift2.move(20);
-			}
-		}
-		else if (master.get_digital(DIGITAL_L2)) {
-			clawlift.move(127);
-		}
-		else if (master.get_digital(DIGITAL_L1)) {
-			clawlift.move(-127);
-		}
-		else {
-
-			clawlift.move(0);
-			lift1.move(0);
-			lift2.move(0);
-	}
+    	 
 	}
 }

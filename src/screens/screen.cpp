@@ -246,10 +246,10 @@ lv_obj_t* roler2;
     UI::background(R3, motor_temp_color(righty.get_temperature(2)));
 
     UI::background(lift_L1, motor_temp_color(lift1.get_temperature()));
-    UI::background(lift_R1, motor_temp_color(lift2.get_temperature()));
+    UI::background(lift_R1, motor_temp_color(lift1.get_temperature()));
 
     UI::background(roller1, motor_temp_color(clawlift.get_temperature()));
-    UI::background(roler2, motor_temp_color(claw.get_temperature()));
+    UI::background(roler2, motor_temp_color(intake_claw.get_temperature()));
 }
 
 
@@ -1142,10 +1142,10 @@ lv_obj_t* roler2;
         UI::label(motors_screen, "R3", 90, 165);
 
         UI::label(motors_screen, "Lift 1", 185, 55);
-        UI::label(motors_screen, "Lift 2", 240, 55);
+        UI::label(motors_screen, "Lift 1", 240, 55);
 
-        UI::label(motors_screen, "Roll 1", 360, 55);
-        UI::label(motors_screen, "Roll 2", 415, 55);
+        UI::label(motors_screen, "claw mover", 360, 55);
+        UI::label(motors_screen, "intake 2", 415, 55);
         if (motor_temp_timer == nullptr)
 {
     motor_temp_timer = lv_timer_create(
