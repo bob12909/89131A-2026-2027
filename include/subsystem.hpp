@@ -3,7 +3,7 @@
 #include "pros/imu.hpp"
 #include "pros/motor_group.hpp"
 #pragma once
-
+//this sets up the devices so we can accually use them
 inline pros::Controller master(pros::E_CONTROLLER_MASTER);
 inline pros::Imu Bob( 19);
 inline pros::MotorGroup lefty({-4, -1, 3}); 

@@ -9,7 +9,7 @@
 #include "pros/screen.hpp"
 #include "ui/screens.hpp"
 #include "ui/buttons.hpp"
-
+// this is where we 
 void my_flush_cb(
     lv_display_t *disp,
     const lv_area_t *area,

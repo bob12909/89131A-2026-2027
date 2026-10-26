@@ -3,9 +3,9 @@
  #include "PID.hpp"
 
  void autonomous() {
-
+   //I made a auton selector so we can select which auton we want to run on the screen and then it will run that auton
      if (auton_select == 1 || auton_select == 4) {
-
+        
      }
      else if (auton_select == 2 || auton_select == 5) {
 
@@ -14,14 +14,6 @@
 
      }
      else if (auton_select == 7) {
-        odom(0.3,0);
-        odom(0,0);
-        odom(0.8,1);
-        odom(2.5,0);
-        odom(1.2,1);
-        odom(2.5,0);
-        odom(2,1.8);
-        odom(3,3);
-        odom(1,3);
+        
       }
 }

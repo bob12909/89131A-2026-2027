@@ -1,6 +1,6 @@
 #include "pros/misc.h"
 #include "subsystem.hpp"
-
+//each of the drivers have diffrent play styles so these functions work seo each can have their own controls
 int counter = 0;
 void kenzy() {
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
@@ -50,26 +50,26 @@ void shyloh() {
     	lift1.move(127);
 		
 		}
-		else if (master.get_digital(DIGITAL_L1)) {
+		else if (master.get_digital(DIGITAL_R2)) {
 			lift1.move(-127);
 		}
-        else if (master.get_digital(DIGITAL_R2)) {
+        else if (master.get_digital(DIGITAL_L1)) {
 			intake_claw.move(127);
 		}
         else if (master.get_digital(DIGITAL_R1)) {
 			intake_claw.move(-127);
 		}
-		else if (master.get_digital(DIGITAL_B)) {
+		else if (master.get_digital(DIGITAL_Y)) {
 			clawlift.move(127);
 		}
-		else if (master.get_digital(DIGITAL_Y)) {
+		else if (master.get_digital(DIGITAL_RIGHT)) {
 			clawlift.move(-127);
 		}
-		else if (master.get_digital(DIGITAL_R2)) {
+		else if (master.get_digital(DIGITAL_B)) {
 			intake_claw.move(127);
 			intake.move(127);
 		}
-        else if (master.get_digital(DIGITAL_R1)) {
+        else if (master.get_digital(DIGITAL_DOWN)) {
 			intake_claw.move(-127);
 			intake.move(-127);
 		}

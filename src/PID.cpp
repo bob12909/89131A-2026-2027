@@ -53,7 +53,38 @@ void PID(double deg) {
     lefty.move(0);
     righty.move(0);
 }
+    void drivey(double inches) {
+    constexpr double degree_inches =
+        (M_PI * 2) / 360.0;
     
+    const double start = y.get_position() / 100.0;
+    const double target = inches;
+
+    // if you request zero inches it just stops your motors
+    if (std::fabs(inches) < 0.1) {
+        lefty.move(0);
+        righty.move(0);
+        return;
+    }
+    const double targetDeg = target / degree_inches;
+    const double targetPos = start + targetDeg;
+
+    while (true) {
+        const double current = y.get_position() / 100.0;
+        const double error = targetPos - current;
+        if (std::fabs(error) < 3.0) {
+            break;
+        }
+
+        const int power = (error > 0) ? -60 : 60;
+
+        lefty.move(power);
+        righty.move(power);
+        pros::delay(10);
+    }
+    lefty.move(0);
+    righty.move(0);
+}
 void odom(double xd,double yd) {
     kp = 3;
     ki = 0.01;

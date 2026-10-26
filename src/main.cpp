@@ -17,13 +17,14 @@
 void initialize() {
 	y.reset_position();
     x.reset_position();
-	Themes::set(Themes::ID::Dog);
+	Themes::set(Themes::ID::MC);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
 }
-
 /**
+
+
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.

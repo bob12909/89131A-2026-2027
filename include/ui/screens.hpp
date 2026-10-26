@@ -3,6 +3,7 @@
 #include "liblvgl/lvgl.h"
 #include <string>
 #pragma once
+//this is where i declared all of the screens we used on the vex brain and where we got variables from screen.cpp to other files
 extern lv_color_t  bc1;
 extern lv_color_t  bc2;
 extern double auton_select;
