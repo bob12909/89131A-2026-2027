@@ -9,7 +9,7 @@
 #include "pros/screen.hpp"
 #include "ui/screens.hpp"
 #include "ui/buttons.hpp"
-// this is where we 
+// this is where we make sure the screens dont go past 480x240
 void my_flush_cb(
     lv_display_t *disp,
     const lv_area_t *area,
@@ -34,12 +34,14 @@ void my_flush_cb(
 
     lv_display_flush_ready(disp);
 }
+
 void lvgl_task_fn(void*) {
     while (true) {
         lv_timer_handler();
         pros::delay(5);
     }
 }
+//this wherewe initialize the GUI and set the colors and backgrounds for the screens
 void initializeGUI() {
 
     lv_init();

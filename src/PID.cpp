@@ -54,9 +54,10 @@ void PID(double deg) {
     righty.move(0);
 }
     void drivey(double inches) {
+        //this is where we get how far we have gone in inches
     constexpr double degree_inches =
         (M_PI * 2) / 360.0;
-    
+        //this is where we get the starting position
     const double start = y.get_position() / 100.0;
     const double target = inches;
 
@@ -66,10 +67,12 @@ void PID(double deg) {
         righty.move(0);
         return;
     }
+    //this where we get how far our target is
     const double targetDeg = target / degree_inches;
     const double targetPos = start + targetDeg;
 
     while (true) {
+        //this is where we get our error which is our our target position - current position
         const double current = y.get_position() / 100.0;
         const double error = targetPos - current;
         if (std::fabs(error) < 3.0) {
@@ -77,11 +80,12 @@ void PID(double deg) {
         }
 
         const int power = (error > 0) ? -60 : 60;
-
+        // this is when we set the motors to move based of the error
         lefty.move(power);
         righty.move(power);
         pros::delay(10);
     }
+    // this is where we stop the motors when we reach our target
     lefty.move(0);
     righty.move(0);
 }

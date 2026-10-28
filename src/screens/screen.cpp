@@ -2,8 +2,8 @@
     #include "ui/themes.hpp"
     #include "ui/buttons.hpp"
     #include "subsystem.hpp"
-    #include "fonts.hpp"
-    #include "imgs.hpp"
+    #include "ui/fonts.hpp"
+    #include "ui/imgs.hpp"
     #include <string>
     int ID = 0;
     namespace {

@@ -72,11 +72,12 @@ void opcontrol() {
 	lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	intake_claw.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	clawlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	//checks whicj profile is selected and runs the function so i can have multiple profiles for different drivers
 	while (true) {
 		if (name == "kenzy"){
 		kenzy();	
 	}
-	else if(name == "shyloh") {
+		else if(name == "shyloh") {
 		shyloh();
 	}
 		
