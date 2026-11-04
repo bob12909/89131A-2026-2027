@@ -4,12 +4,15 @@
 #include "pros/rtos.hpp"
 #include <math.h>
 
-// this is where i delcared all the functions and variables that are used in the PID.cpp
+
 void PID(double deg);
 void odom(double xd, double yd);
 void lift(double hieght);
 void dlift(double hieght);
-void drivey(double inches);
+void drivey(double sec);
+void bdrivey(double sec);
+void rightt(double msec);
+void leftt(double msec);
 
 extern double ki;
 extern double kp;

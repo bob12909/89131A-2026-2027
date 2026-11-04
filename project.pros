@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "main",
+    "project_name": "Main",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -595,7 +595,7 @@
       "icon": "alien",
       "slot": 2,
       "after": "run",
-      "description": "17+ hours for ts"
+      "description": "Too many hours for ts"
     },
     "use_early_access": false
   }

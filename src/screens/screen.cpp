@@ -2,8 +2,8 @@
     #include "ui/themes.hpp"
     #include "ui/buttons.hpp"
     #include "subsystem.hpp"
-    #include "ui/fonts.hpp"
-    #include "ui/imgs.hpp"
+    #include "fonts.hpp"
+    #include "imgs.hpp"
     #include <string>
     int ID = 0;
     namespace {
@@ -38,15 +38,7 @@ lv_obj_t* roler2;
     int32_t awpx = 150;
     int32_t awpy = 12;
     std::string auton_name = "";
-    lv_color_t  disconected1 = lv_color_hex(0x8f8e8d);
-    lv_color_t  disconected2 = lv_color_hex(0x212121);
-    lv_color_t  ready1 = lv_color_hex(0x00ff00);
-    lv_color_t  ready2 = lv_color_hex(0x002200);
-    lv_color_t  med1 = lv_color_hex(0xf2c51f);
-    lv_color_t  med2 = lv_color_hex(0xebcc5e);
-    lv_color_t  burn1 = lv_color_hex(0x2f0000);
-    lv_color_t  burn2 = lv_color_hex(0x220000);
-    double auton_select = 0;
+    double auton_select = 1;
     lv_color_t  qc1 = lv_color_hex(0x8f8e8d);
     lv_color_t  qc2 = lv_color_hex(0x212121);
     lv_color_t  qc3 = lv_color_hex(0x8f8e8d);

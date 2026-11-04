@@ -1,11 +1,20 @@
  #include "main.h"
  #include "ui/screens.hpp"
  #include "PID.hpp"
+ #include "subsystem.hpp"
+
 
  void autonomous() {
-   //I made a auton selector so we can select which auton we want to run on the screen and then it will run that auton
+
      if (auton_select == 1 || auton_select == 4) {
-        
+      drivey(0.15);
+      pros::delay(200);
+      bdrivey(0.35);
+      pros::delay(200);
+      drivey(0.5);
+      clawlift.move(127);
+      leftt(100);
+      
      }
      else if (auton_select == 2 || auton_select == 5) {
 

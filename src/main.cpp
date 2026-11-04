@@ -15,16 +15,15 @@
  #include "subsystem.hpp"
 
 void initialize() {
-	y.reset_position();
     x.reset_position();
 	Themes::set(Themes::ID::MC);
+	pros::delay(20);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
 }
+
 /**
-
-
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
@@ -69,16 +68,16 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	
 	lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	intake_claw.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	clawlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	//checks whicj profile is selected and runs the function so i can have multiple profiles for different drivers
 	while (true) {
 		if (name == "kenzy"){
-		kenzy();	
+			kenzy();	
 	}
 		else if(name == "shyloh") {
-		shyloh();
+			shyloh();
 	}
 		
 		

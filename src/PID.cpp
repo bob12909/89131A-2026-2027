@@ -1,12 +1,16 @@
 
 #include "PID.hpp"
-inline pros::Imu Bob(19);
-inline pros::MotorGroup lefty({-15, -1, 3});
-inline pros::MotorGroup righty({-9, 16, 10});
+inline pros::Controller master(pros::E_CONTROLLER_MASTER);
+inline pros::Imu Bob( 13);
+inline pros::MotorGroup lefty({15, 1}); 
+inline pros::MotorGroup righty({16, 10});
 inline pros::Rotation x(20);
 inline pros::Rotation y(21);
 inline pros::Motor lift1(-6);
-inline pros::Motor lift2(8);
+inline pros::Motor lift2(-7);
+inline pros::Motor intake_claw(8);
+inline pros::Motor clawlift(5);
+inline pros::MotorGroup intake({14, -17});
 const double PI = 3.14159265358979323846;
 double ki = 0;
 double kp = 0;
@@ -53,41 +57,37 @@ void PID(double deg) {
     lefty.move(0);
     righty.move(0);
 }
-    void drivey(double inches) {
-        //this is where we get how far we have gone in inches
-    constexpr double degree_inches =
-        (M_PI * 2) / 360.0;
-        //this is where we get the starting position
-    const double start = y.get_position() / 100.0;
-    const double target = inches;
-
-    // if you request zero inches it just stops your motors
-    if (std::fabs(inches) < 0.1) {
-        lefty.move(0);
-        righty.move(0);
-        return;
-    }
-    //this where we get how far our target is
-    const double targetDeg = target / degree_inches;
-    const double targetPos = start + targetDeg;
-
-    while (true) {
-        //this is where we get our error which is our our target position - current position
-        const double current = y.get_position() / 100.0;
-        const double error = targetPos - current;
-        if (std::fabs(error) < 3.0) {
-            break;
-        }
-
-        const int power = (error > 0) ? -60 : 60;
-        // this is when we set the motors to move based of the error
-        lefty.move(power);
-        righty.move(power);
-        pros::delay(10);
-    }
-    // this is where we stop the motors when we reach our target
-    lefty.move(0);
+    void drivey(double sec) { 
+    lefty.move(127); 
+    righty.move(127);
+    pros::delay(sec * 1000);
+    lefty.move(0); 
     righty.move(0);
+    pros::delay(50);
+}
+void bdrivey(double sec) { 
+    lefty.move(-127); 
+    righty.move(-127);
+    pros::delay(sec * 1000);
+    lefty.move(0); 
+    righty.move(0);
+    pros::delay(50);
+}
+void rightt(double msec) { 
+    lefty.move(-127); 
+    righty.move(127);
+    pros::delay(msec);
+    lefty.move(0); 
+    righty.move(0);
+    pros::delay(50);
+}
+void leftt(double msec) { 
+    lefty.move(127); 
+    righty.move(-127);
+    pros::delay(msec);
+    lefty.move(0); 
+    righty.move(0);
+    pros::delay(50);
 }
 void odom(double xd,double yd) {
     kp = 3;
@@ -95,6 +95,7 @@ void odom(double xd,double yd) {
     kd = 12;
     
     while (true) {
+        y.reset_position();
         //
         double xerror = xd - (x.get_position()/36000)* wheel;
         double yerror = yd - (y.get_position()/36000)* wheel;
