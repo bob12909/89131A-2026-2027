@@ -1,12 +1,12 @@
 
 #include "PID.hpp"
+inline pros::adi::DigitalOut intake_pistion('B');
 inline pros::Imu Bob(19);
-inline pros::MotorGroup lefty({-15, -1, 3});
-inline pros::MotorGroup righty({-9, 16, 10});
+inline pros::MotorGroup lefty({15, 1}); 
+inline pros::MotorGroup righty({16, 17});
 inline pros::Rotation x(20);
 inline pros::Rotation y(21);
-inline pros::Motor lift1(-6);
-inline pros::Motor lift2(8);
+inline pros::MotorGroup lift1({-6,7});
 const double PI = 3.14159265358979323846;
 double ki = 0;
 double kp = 0;
@@ -155,7 +155,7 @@ void lift(double hieght){
         double power2 = error2 * kp + integral2 * ki + derivitave2 * kd;
         //
         lift1.move(power1);
-        lift2.move(power2);
+       
     
     }
 }
@@ -189,7 +189,7 @@ void dlift(double hieght){
             break;
         }
         if (fabs(error2) < 1) {
-            lift2.move(0);
+           
             lift = false;
             break;
         }
@@ -204,7 +204,7 @@ void dlift(double hieght){
         double power2 = error2 * kp + integral2 * ki + derivitave2 * kd;
         //
         lift1.move(-power1);
-        lift2.move(power2);
+       
         
         preverror1 = error1;
         preverror2 = error2;

@@ -3,10 +3,6 @@
  *
  */
 
-/**
- * Modified by NXP in 2024
- */
-
 #ifndef LV_DRAW_PRIVATE_H
 #define LV_DRAW_PRIVATE_H
 
@@ -18,7 +14,10 @@ extern "C" {
  *      INCLUDES
  *********************/
 
-#include "lv_draw.h"
+#include "../lvgl_public.h"
+#include "../osal/lv_os_private.h"
+#include "../misc/cache/lv_cache.h"
+#include "../misc/cache/lv_cache_entry.h"
 
 /*********************
  *      DEFINES
@@ -43,24 +42,28 @@ struct _lv_draw_task_t {
      */
     lv_area_t _real_area;
 
-    /** The original area which is updated*/
-    lv_area_t clip_area_original;
-
     /**
      * The clip area of the layer is saved here when the draw task is created.
      * As the clip area of the layer can be changed as new draw tasks are added its current value needs to be saved.
      * Therefore during drawing the layer's clip area shouldn't be used as it might be already changed for other draw tasks.
      */
     lv_area_t clip_area;
+    lv_layer_t * target_layer;
 
 #if LV_DRAW_TRANSFORM_USE_MATRIX
     /** Transform matrix to be applied when rendering the layer */
     lv_matrix_t matrix;
 #endif
 
+    /* Reference to the draw unit for debug or draw context purposes */
+    lv_draw_unit_t * draw_unit;
+
     volatile int state;              /** int instead of lv_draw_task_state_t to be sure its atomic */
 
     void * draw_dsc;
+
+    /** Opacity of the layer */
+    lv_opa_t opa;
 
     /**
      * The ID of the draw_unit which should take this task
@@ -85,11 +88,10 @@ struct _lv_draw_unit_t {
     lv_draw_unit_t * next;
 
     /**
-     * The target_layer on which drawing should happen
+     * Name and ID of the draw unit, for debugging purposes only.
      */
-    lv_layer_t * target_layer;
-
-    const lv_area_t * clip_area;
+    const char * name;
+    int32_t idx;
 
     /**
      * Called to try to assign a draw task to itself.
@@ -166,12 +168,18 @@ struct _lv_draw_unit_t {
      * @return
      */
     int32_t (*delete_cb)(lv_draw_unit_t * draw_unit);
+
+    /**
+     * Called when an event is sent to the draw unit.
+     * @param event pointer to the event descriptor
+     */
+    void (*event_cb)(lv_event_t * event);
 };
 
 typedef struct {
     lv_draw_unit_t * unit_head;
     uint32_t unit_cnt;
-    uint32_t used_memory_for_layers_kb;
+    uint32_t used_memory_for_layers; /* measured as bytes */
 #if LV_USE_OS
     lv_thread_sync_t sync;
 #else
@@ -184,6 +192,13 @@ typedef struct {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
+
+/**
+ * Free a draw task and everything it owns
+ * Used both by the normal dispatch path and to unwind a redraw that is being abandoned.
+ * @param  t      draw task to free
+ */
+void lv_draw_cleanup_task(lv_draw_task_t * t);
 
 /**********************
  *      MACROS

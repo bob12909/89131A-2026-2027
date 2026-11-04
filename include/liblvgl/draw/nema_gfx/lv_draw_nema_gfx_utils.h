@@ -25,7 +25,7 @@
  */
 
 /**
- * @file lv_draw_nema_gfx.h
+ * @file lv_draw_nema_gfx_utils.h
  *
  */
 
@@ -39,16 +39,71 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
-#include "../../lv_conf_internal.h"
+#include "../../lvgl_public.h"
 
 #if LV_USE_NEMA_GFX
 #include "../sw/lv_draw_sw.h"
 
-#include "nema_core.h"
-#include "nema_utils.h"
-#include "nema_error.h"
-#include "nema_provisional.h"
-#include "nema_vg.h"
+#if LV_USE_NEMA_LIB == LV_NEMA_LIB_NONE
+#warning since v9.5, LV_USE_NEMA_LIB should be specified in lv_conf.h. LV_NEMA_LIB_M33_REVC will be used by default.
+#endif
+
+#if LV_USE_NEMA_LIB == LV_NEMA_LIB_NONE || LV_USE_NEMA_LIB == LV_NEMA_LIB_M33_REVC || LV_USE_NEMA_LIB == LV_NEMA_LIB_M33_NEMAPVG
+#include "../../../libs/nema_gfx/include/cortex_m33/build_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_blender.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_cmdlist.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_core.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_easing.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_error.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_font.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_graphics.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_hal.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_interpolators.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_math.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_matrix3x3.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_matrix4x4.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_provisional.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_raster.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_sys_defs.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_transitions.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_utils.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_context.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_font.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_paint.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_path.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_tsvg.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/nema_vg_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m33/tsi_malloc.h"
+#elif LV_USE_NEMA_LIB == LV_NEMA_LIB_M55 || LV_USE_NEMA_LIB == LV_NEMA_LIB_M7
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/build_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_blender.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_cmdlist.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_core.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_easing.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_error.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_font.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_graphics.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_hal.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_interpolators.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_math.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_matrix3x3.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_matrix4x4.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_provisional.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_raster.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_sys_defs.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_transitions.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_context.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_font.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_paint.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_path.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_tsvg.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/nema_vg_version.h"
+#include "../../../libs/nema_gfx/include/cortex_m55_m7/tsi_malloc.h"
+#endif
 
 /*********************
  *      DEFINES
@@ -83,6 +138,13 @@ uintptr_t NEMA_VIRT2PHYS(void * addr);
  **********************/
 
 /**
+ * Check if  `lv_color_format_t` is supported.
+ * @param     cf  The LVGL color format
+ * @return        True/false
+ */
+bool lv_nemagfx_is_cf_supported(lv_color_format_t cf);
+
+/**
  * Convert a `lv_color_format_t` to a Nema color format.
  * @param     cf  The LVGL color format
  * @return        The Nema color format
@@ -105,7 +167,7 @@ uint32_t lv_nemagfx_blending_mode(lv_blend_mode_t lv_blend_mode);
  *
  * @param[in] gradient NemaGFX Gradient Buffer
  *
- * @param[in] lv_grad Gradient descripto
+ * @param[in] lv_grad Gradient descriptor
  *
  * @param[in] opa Descriptor's opacity
  *

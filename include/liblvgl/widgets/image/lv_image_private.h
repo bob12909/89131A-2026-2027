@@ -15,9 +15,9 @@ extern "C" {
  *********************/
 
 #include "../../core/lv_obj_private.h"
-#include "lv_image.h"
+#include "../../lvgl_public.h"
 
-#if LV_USE_IMAGE != 0
+#if LV_USE_IMAGE
 
 /*********************
  *      DEFINES
@@ -47,7 +47,6 @@ struct _lv_image_t {
     uint32_t align: 4;      /**< Image size mode when image size and object size is different. See lv_image_align_t*/
     uint32_t blend_mode: 4; /**< Element of `lv_blend_mode_t`*/
 };
-
 
 /**********************
  * GLOBAL PROTOTYPES

@@ -1,23 +1,19 @@
 /**
  * @file lvgl.h
- * Include all LVGL related headers
+ * This file exists only to be compatible with Arduino's library structure
  */
 
-#ifndef LVGL_H
-#define LVGL_H
+#ifndef LVGL_SRC_H
+#define LVGL_SRC_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/***************************
- * CURRENT VERSION OF LVGL
- ***************************/
-#include "lv_version.h"
-
 /*********************
  *      INCLUDES
  *********************/
+
 #include "lvgl_private.h"
 #include "liblvgl/lv_init.h"
 
@@ -141,55 +137,8 @@ extern "C" {
  *      MACROS
  **********************/
 
-/** Gives 1 if the x.y.z version is supported in the current version
- * Usage:
- *
- * - Require v6
- * #if LV_VERSION_CHECK(6,0,0)
- *   new_func_in_v6();
- * #endif
- *
- *
- * - Require at least v5.3
- * #if LV_VERSION_CHECK(5,3,0)
- *   new_feature_from_v5_3();
- * #endif
- *
- *
- * - Require v5.3.2 bugfixes
- * #if LV_VERSION_CHECK(5,3,2)
- *   bugfix_in_v5_3_2();
- * #endif
- *
- */
-#define LV_VERSION_CHECK(x,y,z) (x == LVGL_VERSION_MAJOR && (y < LVGL_VERSION_MINOR || (y == LVGL_VERSION_MINOR && z <= LVGL_VERSION_PATCH)))
-
-/**
- * Wrapper functions for VERSION macros
- */
-
-static inline int lv_version_major(void)
-{
-    return LVGL_VERSION_MAJOR;
-}
-
-static inline int lv_version_minor(void)
-{
-    return LVGL_VERSION_MINOR;
-}
-
-static inline int lv_version_patch(void)
-{
-    return LVGL_VERSION_PATCH;
-}
-
-static inline const char * lv_version_info(void)
-{
-    return LVGL_VERSION_INFO;
-}
-
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif
 
-#endif /*LVGL_H*/
+#endif /* LVGL_SRC_H */

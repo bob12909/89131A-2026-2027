@@ -1,106 +1,129 @@
 /**
- * @file lvgl_private.h
- *
+ * @file lvgl.h
+ * Include all LVGL related headers
  */
 
-#ifndef LVGL_PRIVATE_H
-#define LVGL_PRIVATE_H
+#ifndef LVGL_H
+#define LVGL_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/***************************
+ * CURRENT VERSION OF LVGL
+ ***************************/
+#include "lv_version.h"
+
 /*********************
  *      INCLUDES
  *********************/
-#include "core/lv_global.h"
+#include "lvgl_private.h"
+#include "liblvgl/lv_init.h"
 
-#include "display/lv_display_private.h"
-#include "indev/lv_indev_private.h"
-#include "misc/lv_text_private.h"
-#include "misc/cache/lv_cache_entry_private.h"
-#include "misc/cache/lv_cache_private.h"
-#include "layouts/lv_layout_private.h"
-#include "stdlib/lv_mem_private.h"
-#include "others/file_explorer/lv_file_explorer_private.h"
-#include "others/sysmon/lv_sysmon_private.h"
-#include "others/monkey/lv_monkey_private.h"
-#include "others/ime/lv_ime_pinyin_private.h"
-#include "others/fragment/lv_fragment_private.h"
-#include "others/observer/lv_observer_private.h"
-#include "libs/qrcode/lv_qrcode_private.h"
-#include "libs/barcode/lv_barcode_private.h"
-#include "libs/gif/lv_gif_private.h"
-#include "draw/lv_draw_triangle_private.h"
-#include "draw/lv_draw_private.h"
-#include "draw/lv_draw_rect_private.h"
-#include "draw/lv_draw_image_private.h"
-#include "draw/lv_image_decoder_private.h"
-#include "draw/lv_draw_label_private.h"
-#include "draw/lv_draw_vector_private.h"
-#include "draw/lv_draw_buf_private.h"
-#include "draw/lv_draw_mask_private.h"
-#include "draw/sw/lv_draw_sw_gradient_private.h"
-#include "draw/sw/lv_draw_sw_private.h"
-#include "draw/sw/lv_draw_sw_mask_private.h"
-#include "draw/sw/blend/lv_draw_sw_blend_private.h"
-#include "drivers/libinput/lv_xkb_private.h"
-#include "drivers/libinput/lv_libinput_private.h"
-#include "font/lv_font_fmt_txt_private.h"
-#include "themes/lv_theme_private.h"
-#include "core/lv_refr_private.h"
-#include "core/lv_obj_style_private.h"
-#include "core/lv_obj_private.h"
-#include "core/lv_obj_scroll_private.h"
-#include "core/lv_obj_draw_private.h"
-#include "core/lv_obj_class_private.h"
-#include "core/lv_group_private.h"
-#include "core/lv_obj_event_private.h"
-#include "misc/lv_timer_private.h"
-#include "misc/lv_area_private.h"
-#include "misc/lv_fs_private.h"
-#include "misc/lv_profiler_builtin_private.h"
-#include "misc/lv_event_private.h"
-#include "misc/lv_bidi_private.h"
-#include "misc/lv_rb_private.h"
-#include "misc/lv_style_private.h"
-#include "misc/lv_color_op_private.h"
-#include "misc/lv_anim_private.h"
-#include "widgets/msgbox/lv_msgbox_private.h"
-#include "widgets/buttonmatrix/lv_buttonmatrix_private.h"
-#include "widgets/slider/lv_slider_private.h"
-#include "widgets/switch/lv_switch_private.h"
-#include "widgets/calendar/lv_calendar_private.h"
-#include "widgets/imagebutton/lv_imagebutton_private.h"
-#include "widgets/bar/lv_bar_private.h"
-#include "widgets/image/lv_image_private.h"
-#include "widgets/textarea/lv_textarea_private.h"
-#include "widgets/table/lv_table_private.h"
-#include "widgets/checkbox/lv_checkbox_private.h"
-#include "widgets/roller/lv_roller_private.h"
-#include "widgets/win/lv_win_private.h"
-#include "widgets/keyboard/lv_keyboard_private.h"
-#include "widgets/line/lv_line_private.h"
-#include "widgets/animimage/lv_animimage_private.h"
-#include "widgets/dropdown/lv_dropdown_private.h"
-#include "widgets/menu/lv_menu_private.h"
-#include "widgets/chart/lv_chart_private.h"
-#include "widgets/button/lv_button_private.h"
-#include "widgets/scale/lv_scale_private.h"
-#include "widgets/led/lv_led_private.h"
-#include "widgets/arc/lv_arc_private.h"
-#include "widgets/tileview/lv_tileview_private.h"
-#include "widgets/spinbox/lv_spinbox_private.h"
-#include "widgets/span/lv_span_private.h"
-#include "widgets/label/lv_label_private.h"
-#include "widgets/canvas/lv_canvas_private.h"
-#include "widgets/tabview/lv_tabview_private.h"
-#include "tick/lv_tick_private.h"
-#include "stdlib/builtin/lv_tlsf_private.h"
-#include "libs/rlottie/lv_rlottie_private.h"
-#include "libs/ffmpeg/lv_ffmpeg_private.h"
-#include "widgets/lottie/lv_lottie_private.h"
-#include "osal/lv_os_private.h"
+#include "liblvgl/stdlib/lv_mem.h"
+#include "liblvgl/stdlib/lv_string.h"
+#include "liblvgl/stdlib/lv_sprintf.h"
+
+#include "liblvgl/misc/lv_log.h"
+#include "liblvgl/misc/lv_timer.h"
+#include "liblvgl/misc/lv_math.h"
+#include "liblvgl/misc/lv_array.h"
+#include "liblvgl/misc/lv_async.h"
+#include "liblvgl/misc/lv_anim_timeline.h"
+#include "liblvgl/misc/lv_profiler_builtin.h"
+#include "liblvgl/misc/lv_rb.h"
+#include "liblvgl/misc/lv_utils.h"
+
+#include "liblvgl/tick/lv_tick.h"
+
+#include "liblvgl/core/lv_obj.h"
+#include "liblvgl/core/lv_group.h"
+#include "liblvgl/indev/lv_indev.h"
+#include "liblvgl/core/lv_refr.h"
+#include "liblvgl/display/lv_display.h"
+
+#include "liblvgl/font/lv_font.h"
+#include "liblvgl/font/lv_binfont_loader.h"
+#include "liblvgl/font/lv_font_fmt_txt.h"
+
+#include "liblvgl/widgets/animimage/lv_animimage.h"
+#include "liblvgl/widgets/arc/lv_arc.h"
+#include "liblvgl/widgets/bar/lv_bar.h"
+#include "liblvgl/widgets/button/lv_button.h"
+#include "liblvgl/widgets/buttonmatrix/lv_buttonmatrix.h"
+#include "liblvgl/widgets/calendar/lv_calendar.h"
+#include "liblvgl/widgets/canvas/lv_canvas.h"
+#include "liblvgl/widgets/chart/lv_chart.h"
+#include "liblvgl/widgets/checkbox/lv_checkbox.h"
+#include "liblvgl/widgets/dropdown/lv_dropdown.h"
+#include "liblvgl/widgets/image/lv_image.h"
+#include "liblvgl/widgets/imagebutton/lv_imagebutton.h"
+#include "liblvgl/widgets/keyboard/lv_keyboard.h"
+#include "liblvgl/widgets/label/lv_label.h"
+#include "liblvgl/widgets/led/lv_led.h"
+#include "liblvgl/widgets/line/lv_line.h"
+#include "liblvgl/widgets/list/lv_list.h"
+#include "liblvgl/widgets/lottie/lv_lottie.h"
+#include "liblvgl/widgets/menu/lv_menu.h"
+#include "liblvgl/widgets/msgbox/lv_msgbox.h"
+#include "liblvgl/widgets/roller/lv_roller.h"
+#include "liblvgl/widgets/scale/lv_scale.h"
+#include "liblvgl/widgets/slider/lv_slider.h"
+#include "liblvgl/widgets/span/lv_span.h"
+#include "liblvgl/widgets/spinbox/lv_spinbox.h"
+#include "liblvgl/widgets/spinner/lv_spinner.h"
+#include "liblvgl/widgets/switch/lv_switch.h"
+#include "liblvgl/widgets/table/lv_table.h"
+#include "liblvgl/widgets/tabview/lv_tabview.h"
+#include "liblvgl/widgets/textarea/lv_textarea.h"
+#include "liblvgl/widgets/tileview/lv_tileview.h"
+#include "liblvgl/widgets/win/lv_win.h"
+
+#include "liblvgl/others/snapshot/lv_snapshot.h"
+#include "liblvgl/others/sysmon/lv_sysmon.h"
+#include "liblvgl/others/monkey/lv_monkey.h"
+#include "liblvgl/others/gridnav/lv_gridnav.h"
+#include "liblvgl/others/fragment/lv_fragment.h"
+#include "liblvgl/others/imgfont/lv_imgfont.h"
+#include "liblvgl/others/observer/lv_observer.h"
+#include "liblvgl/others/ime/lv_ime_pinyin.h"
+#include "liblvgl/others/file_explorer/lv_file_explorer.h"
+
+#include "liblvgl/libs/barcode/lv_barcode.h"
+#include "liblvgl/libs/bin_decoder/lv_bin_decoder.h"
+#include "liblvgl/libs/bmp/lv_bmp.h"
+#include "liblvgl/libs/rle/lv_rle.h"
+#include "liblvgl/libs/fsdrv/lv_fsdrv.h"
+#include "liblvgl/libs/lodepng/lv_lodepng.h"
+#include "liblvgl/libs/libpng/lv_libpng.h"
+#include "liblvgl/libs/gif/lv_gif.h"
+#include "liblvgl/libs/qrcode/lv_qrcode.h"
+#include "liblvgl/libs/tjpgd/lv_tjpgd.h"
+#include "liblvgl/libs/libjpeg_turbo/lv_libjpeg_turbo.h"
+#include "liblvgl/libs/freetype/lv_freetype.h"
+#include "liblvgl/libs/rlottie/lv_rlottie.h"
+#include "liblvgl/libs/ffmpeg/lv_ffmpeg.h"
+#include "liblvgl/libs/tiny_ttf/lv_tiny_ttf.h"
+
+#include "liblvgl/layouts/lv_layout.h"
+
+#include "liblvgl/draw/lv_draw.h"
+#include "liblvgl/draw/lv_draw_buf.h"
+#include "liblvgl/draw/lv_draw_vector.h"
+#include "liblvgl/draw/sw/lv_draw_sw.h"
+
+#include "liblvgl/themes/lv_theme.h"
+
+#include "liblvgl/drivers/lv_drivers.h"
+
+// #include "liblvgl/lv_api_map_v8.h"
+#include "liblvgl/lv_api_map_v9_0.h"
+#include "liblvgl/lv_api_map_v9_1.h"
+
+#if LV_USE_PRIVATE_API
+#include "liblvgl/lvgl_private.h"
+#endif
 
 /*********************
  *      DEFINES
@@ -118,8 +141,55 @@ extern "C" {
  *      MACROS
  **********************/
 
+/** Gives 1 if the x.y.z version is supported in the current version
+ * Usage:
+ *
+ * - Require v6
+ * #if LV_VERSION_CHECK(6,0,0)
+ *   new_func_in_v6();
+ * #endif
+ *
+ *
+ * - Require at least v5.3
+ * #if LV_VERSION_CHECK(5,3,0)
+ *   new_feature_from_v5_3();
+ * #endif
+ *
+ *
+ * - Require v5.3.2 bugfixes
+ * #if LV_VERSION_CHECK(5,3,2)
+ *   bugfix_in_v5_3_2();
+ * #endif
+ *
+ */
+#define LV_VERSION_CHECK(x,y,z) (x == LVGL_VERSION_MAJOR && (y < LVGL_VERSION_MINOR || (y == LVGL_VERSION_MINOR && z <= LVGL_VERSION_PATCH)))
+
+/**
+ * Wrapper functions for VERSION macros
+ */
+
+static inline int lv_version_major(void)
+{
+    return LVGL_VERSION_MAJOR;
+}
+
+static inline int lv_version_minor(void)
+{
+    return LVGL_VERSION_MINOR;
+}
+
+static inline int lv_version_patch(void)
+{
+    return LVGL_VERSION_PATCH;
+}
+
+static inline const char * lv_version_info(void)
+{
+    return LVGL_VERSION_INFO;
+}
+
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif
 
-#endif /*LVGL_PRIVATE_H*/
+#endif /*LVGL_H*/

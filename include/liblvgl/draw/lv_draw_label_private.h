@@ -14,7 +14,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 
-#include "lv_draw_label.h"
+#include "../lvgl_public.h"
 
 /*********************
  *      DEFINES
@@ -42,13 +42,19 @@ struct _lv_draw_label_hint_t {
 };
 
 struct _lv_draw_glyph_dsc_t {
-    void * glyph_data;  /**< Depends on `format` field, it could be image source or draw buf of bitmap or vector data. */
+    /** Depends on `format` field, it could be image source or draw buf of bitmap or vector data. */
+    const void * glyph_data;
     lv_font_glyph_format_t format;
     const lv_area_t * letter_coords;
     const lv_area_t * bg_coords;
-    const lv_font_glyph_dsc_t * g;
+    lv_font_glyph_dsc_t * g;
     lv_color_t color;
     lv_opa_t opa;
+    lv_color_t outline_stroke_color;
+    lv_opa_t outline_stroke_opa;
+    int32_t outline_stroke_width;
+    int32_t rotation;
+    lv_point_t pivot;          /**< Rotation pivot point associated with total glyph including line_height */
     lv_draw_buf_t * _draw_buf; /**< a shared draw buf for get_bitmap, do not use it directly, use glyph_data instead */
 };
 
@@ -56,6 +62,9 @@ struct _lv_draw_glyph_dsc_t {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
+
+void lv_draw_unit_draw_letter_internal(lv_draw_task_t * t, lv_draw_glyph_dsc_t * dsc,  const lv_point_t * pos,
+                                       const lv_font_t * font, uint32_t letter, lv_draw_glyph_cb_t cb);
 
 /**********************
  *      MACROS

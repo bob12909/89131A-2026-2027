@@ -17,7 +17,7 @@
 void initialize() {
 	
     x.reset_position();
-	Themes::set(Themes::ID::MC);
+	Themes::set(Themes::ID::DSA);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
@@ -68,7 +68,7 @@ void competition_initialize() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	
+	lift1.move(127);
 	lift1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	intake_claw.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	clawlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
