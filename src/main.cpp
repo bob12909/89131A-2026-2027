@@ -15,9 +15,9 @@
  #include "subsystem.hpp"
 
 void initialize() {
+	
     x.reset_position();
 	Themes::set(Themes::ID::MC);
-	pros::delay(20);
 	initializeGUI();
 	Screens::init();
 	Screens::show_main();
@@ -74,10 +74,10 @@ void opcontrol() {
 	clawlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	while (true) {
 		if (name == "kenzy"){
-			kenzy();	
+		kenzy();	
 	}
 		else if(name == "shyloh") {
-			shyloh();
+		shyloh();
 	}
 		
 		

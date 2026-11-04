@@ -1,5 +1,4 @@
 #include "pros/misc.h"
-#include "main.h"
 #include "subsystem.hpp"
 
 int counter = 0;
@@ -26,7 +25,8 @@ void kenzy() {
 			intake.move(-127);
 		}
 		else if (master.get_digital(DIGITAL_B)) {
-			clawlift.move(127);
+			clawlift.move_absolute(0, 127);
+			
 		}
 		else if (master.get_digital(DIGITAL_Y)) {
 			clawlift.move(-127);
@@ -46,7 +46,7 @@ void kenzy() {
 		pros::delay(20);
 }
 void shyloh() {
-		if (master.get_digital(DIGITAL_L2)) {
+    	if (master.get_digital(DIGITAL_L2)) {
     	lift1.move(127);
 		
 		}
